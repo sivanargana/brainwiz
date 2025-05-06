@@ -106,17 +106,27 @@
           @apply tw-top-0 tw-text-[12px];
         }
         #faqaccordian {
-          @apply tw-flex tw-flex-col tw-gap-[10px] !tw-rounded-none;
+          @apply tw-flex tw-flex-col tw-gap-[0px] tw-rounded-[7px] tw-shadow;
           .accordion-item {
-            @apply !tw-border-0 !tw-rounded-none tw-shadow-sm;
+            @apply !tw-border-0 tw-shadow-none;
             .accordion-header {
               .accordion-button {
-                @apply !tw-rounded-none !tw-shadow-none;
+                @apply !tw-bg-blue-100/70 !tw-shadow-none !tw-text-[14px];
+                &:after {
+                  font-family: "Font Awesome 6 Free";
+                  @apply tw-content-["\f063"] tw-font-bold tw-bg-none tw-flex tw-items-center tw-justify-center tw-text-[16px];
+                }
+                &:not(.collapsed){
+                  @apply !tw-bg-blue-900 !tw-text-white;
+                  &:after {  
+                }
+                }
               }
             }
           }
         }
       }
+   
     </style>
   </head>
   <body>
@@ -221,7 +231,7 @@
         <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
           <div class="tw-text-[18px] tw-font-bold tw-truncate">Campus Recruitment Training</div>
           <div class="tw-opacity-60 tw-line-clamp-2">This Course will be helpful for Students who are going to appear for any Job Placement/Interview like Infosys, TCS NQT, CapGemini, Accenture, Oracle and many more</div>
-          <div class="tw-font-bold tw-text-primary">₹3500.00</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹3500.00</div> -->
           <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -231,7 +241,7 @@
         <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
           <div class="tw-text-[18px] tw-font-bold tw-truncate">Core Java</div>
           <div class="tw-opacity-60 tw-line-clamp-2">Learning Java can be a great skill to acquire if you want to work in the programming or software</div>
-          <div class="tw-font-bold tw-text-primary">₹4000.00</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹4000.00</div> -->
           <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -241,7 +251,7 @@
         <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
           <div class="tw-text-[18px] tw-font-bold tw-truncate">Campus Recruitment Training (Recorded)</div>
           <div class="tw-opacity-60 tw-line-clamp-2">This Course will be helpful for Students who are going to appear for any Job Placement/Interview like</div>
-          <div class="tw-font-bold tw-text-primary">₹3000.00</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹3000.00</div> -->
           <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -251,7 +261,7 @@
         <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
           <div class="tw-text-[18px] tw-font-bold tw-truncate">CRT + Core Java (Combo)</div>
           <div class="tw-opacity-60 tw-line-clamp-2">This Course will be helpful for Students who are going to appear for any Job Placement/Interview like</div>
-          <div class="tw-font-bold tw-text-primary">₹5000.00</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹5000.00</div> -->
           <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -261,7 +271,7 @@
         <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
           <div class="tw-text-[18px] tw-font-bold tw-truncate">GATE &amp; ESE (Aptitude)</div>
           <div class="tw-opacity-60 tw-line-clamp-2">In this Course, we cover the entire 15 marks of GATE Aptitude, covering Logical Reasoning, Quantitative</div>
-          <div class="tw-font-bold tw-text-primary">₹3000.00</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹3000.00</div> -->
           <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -271,7 +281,7 @@
         <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
           <div class="tw-text-[18px] tw-font-bold tw-truncate">Python (Core &amp; Advance)</div>
           <div class="tw-opacity-60 tw-line-clamp-2">Python is general-purpose, high-level, interpreted, interactive, object-oriented, and open-source. It is</div>
-          <div class="tw-font-bold tw-text-primary">₹7000.00</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹7000.00</div> -->
           <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
         </div>
       </div>

@@ -106,17 +106,27 @@
           @apply tw-top-0 tw-text-[12px];
         }
         #faqaccordian {
-          @apply tw-flex tw-flex-col tw-gap-[10px] !tw-rounded-none;
+          @apply tw-flex tw-flex-col tw-gap-[0px] tw-rounded-[7px] tw-shadow;
           .accordion-item {
-            @apply !tw-border-0 !tw-rounded-none tw-shadow-sm;
+            @apply !tw-border-0 tw-shadow-none;
             .accordion-header {
               .accordion-button {
-                @apply !tw-rounded-none !tw-shadow-none;
+                @apply !tw-bg-blue-100/70 !tw-shadow-none !tw-text-[14px];
+                &:after {
+                  font-family: "Font Awesome 6 Free";
+                  @apply tw-content-["\f063"] tw-font-bold tw-bg-none tw-flex tw-items-center tw-justify-center tw-text-[16px];
+                }
+                &:not(.collapsed){
+                  @apply !tw-bg-blue-900 !tw-text-white;
+                  &:after {  
+                }
+                }
               }
             }
           }
         }
       }
+   
     </style>
   </head>
   <body>
