@@ -1,0 +1,301 @@
+{% extends 'layouts/user-layout.html' %} {% block userLayout %}
+<section class="tw-bg-gradient-to-b tw-from-[#fff4f6] tw-to-[#f6d5f7] tw-flex tw-flex-col tw-justify-center tw-px-[12px] tw-py-[70px]">
+  <div class="tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 md:tw-gap-[80px] tw-items-center">
+      <div data-aos="zoom-in">
+        <div class="tw-w-[500px] tw-max-w-full tw-mx-auto lg:tw-mx-0 tw-bg-white/50 tw-shadow-[0_0_12px_rgba(0,0,0,0.2)] tw-p-[15px] md:tw-p-[30px] tw-rounded-[20px] tw-flex tw-flex-col tw-gap-[8px]">
+          <h1 class="tw-text-[20px] md:tw-text-[24px] tw-font-medium">Like to know about CRT Course ?</h1>
+        <div class="tw-flex tw-flex-col tw-gap-[15px]">
+          <div class="floating-label">
+            <input type="text" class="form-control" id="name" placeholder=" " />
+            <label for="name">Write your name</label>
+          </div>
+          <div class="floating-label">
+            <input type="text" class="form-control" id="phone" placeholder=" " />
+            <label for="phone">Phone Number</label>
+          </div>
+          <div class="floating-label">
+            <input type="email" class="form-control" id="email" placeholder=" " />
+            <label for="email">Email address</label>
+          </div>
+          <div class="floating-label">
+            <textarea class="form-control tw-h-[100px]" placeholder=" " id="query"  ></textarea>
+            <label for="query">Write Query</label>
+          </div>
+          <button type="button" class="btn btn-warning tw-w-full" onclick="send()">Submit</button>
+        </div>
+        </div>
+      </div>
+      <div>
+        <img class="tw-block tw-w-[500px] tw-max-w-full tw-mx-auto" data-aos="zoom-in" src="assets/images/kids-studying-from-home-animate.svg" />
+        <h2 class="tw-text-[32px] tw-font-bold" data-aos="fade-up" data-aos-delay="300">Prepare yourself to get hired in the top tech companies easily</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-bg-white tw-px-[12px] tw-py-[50px]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Courses We Offered</h3>
+      <p class="tw-w-[500px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Brainwiz includes everything that a candidate requires to progress from the level of a fresher to become a skillful employee. Catch a glimpse of what can make you employment-ready!</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-3 tw-gap-[20px]">
+      {% for course in data %}
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/{{ course.image }}" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">{{ course.title }}</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">{{ course.content }}</div>
+          <div class="tw-font-bold tw-text-primary">₹{{ course.price }}</div>
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-gradient-to-b tw-from-white tw-to-[#c7e2ff]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Skill Up with our free content</h3>
+      <p class="tw-w-[500px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Make a free ride to experience the richness!</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-3 tw-gap-[20px]">
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/article.svg" class="tw-aspect-video tw-object-contain tw-max-w-full" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px] tw-text-center">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Article</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In grammar, an article is any member of a class of dedicated words that are used.</div>
+        </div>
+      </div>
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/tests.svg" class="tw-aspect-video tw-object-contain tw-max-w-full" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px] tw-text-center">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Tests</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In grammar, an article is any member of a class of dedicated words that are used.</div>
+        </div>
+      </div>
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/videos.svg" class="tw-aspect-video tw-object-contain tw-max-w-full" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px] tw-text-center">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Videos</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In grammar, an article is any member of a class of dedicated words that are used.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-white">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Get Ready for Placements with Us</h3>
+      <p class="tw-w-[800px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Our Outstanding Training makes your gateway to various career opportunities</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-4 [&>div]:tw-flex [&>div]:tw-flex-col [&>div]:tw-gap-[20px] [&>div]:tw-items-center [&>div]:tw-px-[12px] [&>div]:tw-py-[40px] [&_svg]:tw-size-[80px] [&>div>div]:tw-w-[150px] [&>div>div]:tw-text-center">
+      <div class="tw-flex tw-flex-col tw-bg-amber-100">
+        <svg><use href="#icon-uniE913"></use></svg>
+        <div>Interactive Live Online Sessions</div>
+      </div>
+      <div class="tw-flex tw-flex-col tw-bg-blue-100">
+        <svg><use href="#icon-uniE912"></use></svg>
+        <div>Hands-on Learning Experience</div>
+      </div>
+      <div class="tw-flex tw-flex-col tw-bg-green-100">
+        <svg><use href="#icon-uniE911"></use></svg>
+        <div>Certificate of Completion</div>
+      </div>
+      <div class="tw-flex tw-flex-col tw-bg-red-100">
+        <svg><use href="#icon-uniE910"></use></svg>
+        <div>Highly Affordable and Resourceful</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-white">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">BRAINWIZ Instructor</h3>
+      <p class="tw-w-[800px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Watch our Online Sessions to know about Us</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-12 tw-gap-[20px] [&_img]:tw-w-full [&_img]:tw-object-cover [&_img]:tw-border [&_img]:tw-border-solid [&_img]:tw-border-gray-300  [&_img:hover]:tw-border-blue-300 [&_.swiper-videos_img]:tw-aspect-[16/9] [&_.swiper-video_img]:tw-aspect-[16/9] md:[&_.swiper-video_img]:tw-aspect-[16/6]">
+      <div class="tw-col-span-12 swiper-video">
+        <a href="https://youtu.be/bJSu7faNda4" target="_blank"><img src="https://img.youtube.com/vi/bJSu7faNda4/maxresdefault.jpg" /></a>
+      </div>
+      <div class="tw-col-span-12">
+        <div class="swiper swiper-videos tw-pb-[30px]">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><a href="https://youtu.be/MxRiAL0GlCM" target="_blank"><img src="https://img.youtube.com/vi/MxRiAL0GlCM/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/uUG_m7_kUhQ" target="_blank"><img src="https://img.youtube.com/vi/uUG_m7_kUhQ/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/kKQjMpIAbYo" target="_blank"><img src="https://img.youtube.com/vi/kKQjMpIAbYo/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/bJSu7faNda4" target="_blank"><img src="https://img.youtube.com/vi/bJSu7faNda4/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/MxRiAL0GlCM" target="_blank"><img src="https://img.youtube.com/vi/MxRiAL0GlCM/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/uUG_m7_kUhQ" target="_blank"><img src="https://img.youtube.com/vi/uUG_m7_kUhQ/maxresdefault.jpg" /></a></div>
+          </div>
+          <div class="swiper-pagination tw-bottom-0"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tw-flex tw-justify-center">
+      <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-p-[3px]">
+  <div class="swiper swiper-gallery [&_img]:tw-w-full [&_img]:tw-h-full [&_img]:tw-object-cover]">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery01.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery02.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[600px] tw-h-[500px] tw-grid tw-gap-[3px] [&>img:nth-child(1)]:tw-col-start-1 [&>img:nth-child(1)]:tw-col-end-3 [&>img:nth-child(1)]:tw-row-start-1 [&>img:nth-child(1)]:tw-row-end-2 [&>img:nth-child(2)]:tw-col-start-1 [&>img:nth-child(2)]:tw-col-end-2 [&>img:nth-child(2)]:tw-row-start-2 [&>img:nth-child(2)]:tw-row-end-3 [&>img:nth-child(3)]:tw-col-start-2 [&>img:nth-child(3)]:tw-col-end-3 [&>img:nth-child(3)]:tw-row-start-2 [&>img:nth-child(3)]:tw-row-end-3">
+        <img src="assets/images/gallery03.webp" alt="" />
+        <img src="assets/images/gallery04.webp" alt="" />
+        <img src="assets/images/gallery05.webp" alt="" />
+      </div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery06.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery07.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery08.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery01.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery02.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[600px] tw-h-[500px] tw-grid tw-gap-[3px] [&>img:nth-child(1)]:tw-col-start-1 [&>img:nth-child(1)]:tw-col-end-3 [&>img:nth-child(1)]:tw-row-start-1 [&>img:nth-child(1)]:tw-row-end-2 [&>img:nth-child(2)]:tw-col-start-1 [&>img:nth-child(2)]:tw-col-end-2 [&>img:nth-child(2)]:tw-row-start-2 [&>img:nth-child(2)]:tw-row-end-3 [&>img:nth-child(3)]:tw-col-start-2 [&>img:nth-child(3)]:tw-col-end-3 [&>img:nth-child(3)]:tw-row-start-2 [&>img:nth-child(3)]:tw-row-end-3">
+        <img src="assets/images/gallery03.webp" alt="" />
+        <img src="assets/images/gallery04.webp" alt="" />
+        <img src="assets/images/gallery05.webp" alt="" />
+      </div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery06.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery07.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery08.webp" alt="" /></div>
+   
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-bg-[url(assets/images/trackrecord-bg.jpg)] tw-bg-cover tw-bg-center">
+  <div class="tw-px-[12px] tw-py-[50px] tw-bg-gradient-to-r tw-from-[#432371]/90 tw-to-[#faae7b]/90 tw-text-white">
+    <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+      <div class="tw-flex tw-flex-col tw-gap-[5px]">
+        <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Our Track Record</h3>
+        <p class="tw-w-[800px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">BRAINWIZ has trained more than 50k students and helping them to get placed in top tech companies. Our Expert Trainers provide from basic to Advance level of knowledge that makes students standout in their campus placements.</p>
+      </div>
+      <div class="tw-grid tw-grid-cols-3 [&_h5]:tw-text-[20px] lg:[&_h5]:tw-text-[80px] [&_h5]:tw-m-0 [&_p]:tw-m-0 [&_h5]:tw-font-bold [&_p]:tw-text-[20px] tw-text-center">
+        <div class="tw-flex tw-flex-col">
+          <h5>50K</h5>
+          <p>Active Learners</p>
+        </div>
+        <div class="tw-flex tw-flex-col">
+          <h5>20+</h5>
+          <p>Happy Institutions</p>
+        </div>
+        <div class="tw-flex tw-flex-col">
+          <h5>90%</h5>
+          <p>Placed Students</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-white">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Our Students Success Stories</h3>
+    </div>
+ <div class="-tw-mt-[10px] -tw-mb-[30px]">
+  <div class="-tw-mx-[10px]">
+    <div class="swiper swiper-stories tw-w-full">
+      <div class="swiper-wrapper">
+        {% for course in [1,2,3,4,5,6] %}
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination tw-bottom-0"></div>
+    </div>
+  </div>
+ </div>
+  </div>
+</section>
+<section class="tw-hidden lg:tw-block tw-px-[12px] tw-py-[50px] tw-text-white tw-bg-gradient-to-b tw-from-[#0d3b3c]/90 tw-to-[#001f64]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="tw-text-[25px] tw-text-center tw-font-bold tw-m-0">The BRAINWIZ advantages</h3>
+    </div>
+    <table class="[&_i]:tw-text-[20px] [&_i.fa-circle-check]:tw-text-transparent [&_i.fa-circle-check]:tw-bg-clip-text [&_i.fa-circle-check]:tw-bg-gradient-to-t [&_i.fa-circle-check]:tw-from-amber-500 [&_i.fa-circle-check]:tw-to-yellow-100 [&_tr:nth-child(even)]:tw-bg-black/20 [&_td]:tw-p-[20px] [&_tr>td:not(:first-child)]:tw-text-center">
+      <tr>
+        <td></td>
+        <td>Brainwiz</td>
+        <td>Free Resources</td>
+        <td>Other Courses</td>
+      </tr>
+      <tr>
+        <td>Structured + program solving based</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+      </tr>
+      <tr>
+        <td>Fastest 1:1 doubt support</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Expert Faculty</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+      </tr>
+      <tr>
+        <td>Test Series with Integrated Learning Platform</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+    </table>
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <div class="tw-flex tw-justify-between">
+        <div>Brainwiz</div>
+        <div>Your dream role, faster and with confidence!</div>
+      </div>
+      <div class="progress tw-h-[8px] !tw-rounded-[0px]">
+        <div class="progress-bar" style="width: 100%"></div>
+      </div>
+    </div>
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <div class="tw-flex tw-justify-between">
+        <div>Others</div>
+        <div>Average role, under-cofident</div>
+      </div>
+      <div class="progress tw-h-[8px] !tw-rounded-[0px]">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+    </div>
+    <div class="tw-text-center">
+      <a href="#" class="btn btn-primary btn-bw tw-self-start tw-mb-[20px]">Explore Courses <i class="fa fa-angle-right"></i></a>
+      <h4 class="tw-text-[24px] tw-font-bold">Trusted by learners</h4>
+      <p>50,000+ BRAINWIZ Students working in top Tech companies</p>
+      <div class="tw-flex tw-justify-center tw-gap-[40px] tw-mt-[30px]">
+        <div class="tw-flex tw-items-center tw-gap-[10px] tw-text-left">
+          <img src="assets/images/fb-icon2.png" class="tw-size-[30px]" />
+          <div>
+            <strong class="tw-text-[18px] tw-font-bold">4.5 </strong>
+            <div>354+ reviews</div>
+          </div>
+        </div>
+        <div class="tw-flex tw-items-center tw-gap-[10px] tw-text-left">
+          <img src="assets/images/gl-icon.png" class="tw-size-[30px]" />
+          <div>
+            <strong class="tw-text-[18px] tw-font-bold">4.8</strong>
+            <div>385+ reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

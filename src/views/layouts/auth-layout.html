@@ -1,0 +1,42 @@
+{% extends 'layouts/base-layout.html' %} 
+{% block baseLayout %}
+<div class="tw-bg-[#F7F7FA] tw-min-h-screen tw-grid tw-grid-cols-12" data-aos="fade">
+  <div class="tw-bg-slate-100 tw-col-span-12 lg:tw-col-span-7 tw-hidden lg:tw-flex tw-flex-col tw-items-center tw-justify-center tw-min-w-0 tw-p-[20px] lg:tw-p-[40px]">
+      <img src="assets/images/login.svg"  class="tw-w-[600px] tw-max-w-full" data-aos="zoom-out">
+  </div>
+  <div class="tw-bg-white tw-col-span-12 lg:tw-col-span-5 tw-min-w-0 tw-flex tw-flex-col tw-justify-center tw-py-[40px] tw-px-[20px] lg:tw-p-[40px]">
+      <div class="lg:tw-w-[450px] tw-max-w-full tw-mx-auto">
+        <a href="index.html"><img src="assets/images/logo.svg" class="tw-h-[30px] tw-max-w-full tw-mb-[20px] lg:tw-mb-[60px]" data-aos="fade-up"/></a>
+          {% block authLayout %}
+          <p>Page Will Comes Here!</p>
+          {% endblock %} 
+      </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="otpmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Verify Account</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="tw-text-center">Enter 4 digit OTP sent to <b>+91 9xxxxxxx75</b></p>
+        <div class="tw-flex tw-gap-[10px] tw-justify-center tw-mb-[1rem]">
+          <input type="text" class="form-control tw-w-[40px]" />
+          <input type="text" class="form-control tw-w-[40px]" />
+          <input type="text" class="form-control tw-w-[40px]" />
+          <input type="text" class="form-control tw-w-[40px]" />
+        </div>
+        <div class="tw-flex tw-justify-center tw-mb-[1rem]">
+          <a href="dashboard.html" class="btn btn-primary">Verify and Proceed</a>
+          <!-- <button type="button" class="btn btn-primary">Verify and Proceed</button> -->
+        </div>
+        <p class="tw-text-center">Did not receive the OTP? <a class="tw-font-bold">Resend</a></p>
+        <p class="tw-text-center">Resend in <a class="tw-text-primary">5 seconds</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

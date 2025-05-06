@@ -1,0 +1,42 @@
+{% extends 'layouts/admin-layout.html' %} 
+{% block adminLayout %}
+<nav aria-label="breadcrumb" class="tw-flex-none">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Attendance</li>
+  </ol>
+</nav>
+<div class="tw-flex-auto tw-grid tw-grd-cols-1 lg:tw-grid-cols-2 tw-gap-[20px] lg:tw-gap-[30px]">
+  <div class="tw-flex tw-flex-col">
+    <div class="tw-shadow-md tw-bg-white tw-p-[20px] tw-rounded-[10px] tw-flex tw-flex-col tw-items-center tw-gap-[20px]">
+      <div class="tw-text-[30px] tw-font-bold tw-leading-tight">Show your <span class="tw-text-primary">QR code</span> to your college representative</div>
+      <div class="tw-shadow-md tw-bg-gray-100 tw-p-[5px] lg:tw-py-[20px] lg:tw-px-[30px] tw-rounded-[10px] tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-[20px]">
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-[5px]">
+          <div class="tw-size-[40px] tw-bg-gray-300 tw-rounded-full tw-bg-cover tw-bg-center tw-bg-[url(assets/images/profile.avif)]"></div>
+          <div class="tw-text-[20px] tw-font-bold">Kushi Shroff</div>
+        </div>
+        <img src="assets/images/qr.png" class="tw-w-[400px] tw-max-w-full tw-p-[10px] tw-bg-white tw-shadow tw-rounded-[5px]" />
+        <a class="btn btn-primary" href="#"><i class="fa fa-download"></i> Download</a>
+      </div>
+    </div>
+  </div>
+  <div class="tw-flex tw-flex-col tw-gap-[20px] lg:tw-gap-[30px]">
+    <div class="tw-shadow-md tw-bg-white tw-p-[20px] tw-rounded-[10px]">
+      <div class="tw-flex tw-items-center tw-flex-gap-[20px] tw-pb-[10px] tw-justify-between tw-border-[0px] tw-border-b tw-border-solid tw-border-[#F1F1F2]">
+        <div class="tw-text-[25px] tw-font-semibold">Your CRT Attendance</div>
+        <button type="button" class="btn btn-light btn-icon !tw-bg-gray-200 !tw-size-[50px]"><i class="fa fa-user-group tw-text-primary"></i></button>
+      </div>
+      <div class="tw-text-[60px] tw-font-bold tw-text-primary">92%</div>
+      <div class="tw-text-base">Note: Daily Attendance report will be sent to college</div>
+    </div>
+    <div class="tw-shadow-md tw-bg-white tw-p-[20px] tw-rounded-[10px]">
+      <div class="tw-flex tw-items-center tw-flex-gap-[20px] tw-pb-[10px] tw-justify-between tw-border-[0px] tw-border-b tw-border-solid tw-border-[#F1F1F2]">
+        <div class="tw-text-[25px] tw-font-semibold">Your JAVA Attendance</div>
+        <button type="button" class="btn btn-light btn-icon !tw-bg-gray-200 !tw-size-[50px]"><i class="fa fa-user-group tw-text-primary"></i></button>
+      </div>
+      <div class="tw-text-[60px] tw-font-bold tw-text-primary">88%</div>
+      <div class="tw-text-base">Note: Daily Attendance report will be sent to college</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

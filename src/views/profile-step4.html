@@ -1,0 +1,27 @@
+{% extends 'layouts/profile-layout.html' %} 
+{% block stepLayout %}
+<ul class="bw-steper">
+  <li><span></span></li>
+  <li><span></span></li>
+  <li><span></span></li>
+  <li class="active"><span></span></li>
+</ul>
+<div class="tw-flex tw-items-center  tw-gap-[20px] tw-my-[20px]">
+<div class="tw-flex-none">
+  <div class="tw-size-[100px] tw-flex tw-items-center tw-justify-center tw-bg-gray-200 tw-rounded-lg tw-overflow-hidden">
+    <!-- <i class="fa fa-user tw-text-[30px] tw-opacity-50"></i> -->
+    <img src="assets/images/profile.avif" class="tw-w-full tw-h-full tw-object-cover" />
+  </div>
+</div>
+<div class="tw-flex-auto">
+  <div class="input-group">
+    <input type="file" class="form-control tw-h-auto" id="avtar"> 
+  </div>
+</div>
+</div>
+<hr class="tw-border-gray-400" />
+<div class="tw-flex tw-justify-end tw-gap-[10px]">
+  <a href="profile-step3.html" class="btn btn-secondary">Back</a>
+  <a href="#" class="btn btn-primary">Next</a>
+</div>
+{% endblock %}

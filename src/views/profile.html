@@ -1,0 +1,110 @@
+{% extends 'layouts/profile-layout.html' %} 
+{% block stepLayout %}
+
+<ul class="bw-steper">
+  <li><span></span></li>
+  <li class="active"><span></span></li>
+  <li><span></span></li>
+  <li><span></span></li>
+</ul>
+<div class="tw-grid tw-grid-cols-12 tw-gap-[20px] tw-my-[20px]">
+  <div class="tw-col-span-12 lg:tw-col-span-6 floating-label">
+    <input type="email" class="form-control" id="name" placeholder=" " value="Pavan Jaiswal" />
+    <label for="name">Name</label>
+  </div>
+
+  <div class="tw-col-span-12 lg:tw-col-span-6 floating-label">
+    <input type="email" class="form-control" id="mobile" placeholder=" " value="9xxxxxxx75" />
+    <label for="mobile">Mobile</label>
+  </div>
+
+  
+ 
+  <div class="tw-col-span-12 lg:tw-col-span-12 floating-label">
+    <input type="email" class="form-control" id="email" placeholder=" " />
+    <label for="email">Email</label>
+  </div>
+
+  <div class="tw-col-span-12 floating-label">
+    <select class="form-select" id="Branch">
+      <option>Select</option>
+            </select>
+    <label for="Branch">Branch</label>
+  </div>
+  <div class="tw-col-span-12 floating-label">
+    <input type="text" class="form-control" id="College" placeholder=" " />
+    <label for="College">College</label>
+  </div>
+  <div class="tw-col-span-12 floating-label">
+    <input type="text" class="form-control" id="Collegeid" placeholder=" " />
+    <label for="Collegeid">College Id</label>
+  </div>
+  <div class="tw-col-span-12 floating-label">
+    <input type="text" class="form-control" id="rollnumber" placeholder=" " />
+    <label for="rollnumber">Roll Number</label>
+  </div>
+
+ 
+
+
+ 
+</div>
+<hr class="tw-border-gray-400" />
+<div class="tw-flex tw-justify-center tw-gap-[10px]"> 
+  <a href="#" class="btn btn-primary">Submit</a>
+</div>
+
+
+
+<!-- <form class="wizard" method="POST">
+  <aside class="wizard-content container">
+      <div class="wizard-step">
+        <div class="tw-grid tw-grid-cols-2 tw-gap-[20px]">
+          <div class="tw-col-span-12 lg:tw-col-span-6 floating-label">
+            <input type="email" class="form-control" id="name" placeholder=" " value="Pavan Jaiswal" />
+            <label for="name">Name</label>
+          </div>
+        
+          <div class="tw-col-span-12 lg:tw-col-span-6 floating-label">
+            <input type="email" class="form-control" id="mobile" placeholder=" " value="9xxxxxxx75" />
+            <label for="mobile">Mobile</label>
+          </div>
+          </div>
+      </div>
+   
+      <div class="wizard-step">
+        <div class="floating-label">
+          <input type="email" class="form-control" id="email" placeholder=" " />
+          <label for="email">Email</label>
+        </div>
+      </div>
+   
+      <div class="wizard-step">
+        <div class="tw-grid tw-grid-cols-1 tw-gap-[20px]">
+      
+        <div class="tw-col-span-12 floating-label">
+          <select class="form-select" id="Branch">
+      <option>Select</option>
+            </select>
+          <label for="Branch">Branch</label>
+        </div>
+        <div class="tw-col-span-12 floating-label">
+          <input type="text" class="form-control" id="College" placeholder=" " />
+          <label for="College">College</label>
+        </div>
+        <div class="tw-col-span-12 floating-label">
+          <input type="text" class="form-control" id="Collegeid" placeholder=" " />
+          <label for="Collegeid">College Id</label>
+        </div>
+        <div class="tw-col-span-12 floating-label">
+          <input type="text" class="form-control" id="rollnumber" placeholder=" " />
+          <label for="rollnumber">Roll Number</label>
+        </div>
+        </div>
+      </div>
+   
+  </aside>
+</form> -->
+
+
+{% endblock %}
