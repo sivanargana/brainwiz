@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3b82f6" />
+    <title>Brainwiz</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        prefix: "tw-",
+        corePlugins: {
+          preflight: false,
+        },
+        theme: {
+          extend: {
+            colors: {
+              primary: "var(--primary)",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .bw-steper {
+          counter-reset: item;
+          @apply tw-list-none tw-p-0 tw-m-0 tw-flex;
+          li {
+            counter-increment: item;
+            @apply tw-relative tw-flex-auto tw-flex tw-justify-center;
+            &:before,
+            &:after {
+              @apply tw-content-[''] tw-absolute tw-top-1/2 -tw-translate-y-1/2 tw-h-px tw-w-[calc(50%-20px)] tw-bg-primary;
+            }
+            &:before {
+              @apply tw-left-0;
+            }
+            &:after {
+              @apply tw-right-0;
+            }
+            &:last-child {
+              &:after {
+                @apply tw-hidden;
+              }
+            }
+            &:first-child {
+              &:before {
+                @apply tw-hidden;
+              }
+            }
+            > span {
+              @apply tw-flex tw-relative tw-z-[5] tw-items-center tw-justify-center tw-size-[40px] tw-rounded-full  tw-border tw-border-solid tw-border-primary;
+            }
+            &:not(.active) {
+              span {
+                @apply tw-bg-primary tw-text-white;
+                &:after {
+                  font-family: "Font Awesome 6 Free";
+                  @apply tw-content-["\f00c"] tw-font-bold;
+                }
+              }
+            }
+            &.active,
+            &.active ~ li {
+              span {
+                @apply tw-bg-transparent tw-text-primary;
+                &:after {
+                  @apply tw-content-[counter(item)];
+                }
+              }
+            }
+            &.active {
+              span {
+                @apply !tw-bg-primary !tw-text-white tw-shadow-[0_0_0_3px_white,0_0_0_5px_var(--primary)];
+              }
+            }
+          }
+        }
+        .page-title-bw {
+          @apply tw-flex tw-flex-col tw-items-center tw-gap-[10px] [&:before]:tw-block [&:before]:tw-content-[''] [&:before]:tw-w-[60px]  [&:before]:tw-h-[3px] [&:before]:tw-bg-[#fdab22];
+        }
+        .btn-icon {
+          @apply tw-size-[40px] tw-rounded-full tw-p-0 tw-flex tw-items-center tw-justify-center tw-text-[20px];
+        }
+        .btn-bw {
+          @apply tw-inline-flex tw-items-center tw-gap-[10px] tw-rounded-[5px] tw-px-[30px] tw-h-[44px];
+        }
+        .floating-label {
+          @apply tw-relative;
+        }
+        .floating-label label {
+          @apply tw-text-[14px] tw-px-[2px] tw-transition-all tw-duration-300 tw-ease-out tw-absolute tw-top-1/2 -tw-translate-y-1/2 tw-left-[10px] tw-bg-white;
+        }
+        .floating-label textarea + label {
+          @apply tw-top-[20%];
+        }
+        .floating-label .form-control:focus + label,
+        .floating-label .form-control:not(:placeholder-shown) + label {
+          @apply tw-top-0 tw-text-[12px];
+        }
+        #faqaccordian {
+          @apply tw-flex tw-flex-col tw-gap-[10px] !tw-rounded-none;
+          .accordion-item {
+            @apply !tw-border-0 !tw-rounded-none tw-shadow-sm;
+            .accordion-header {
+              .accordion-button {
+                @apply !tw-rounded-none !tw-shadow-none;
+              }
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    
+
+<div class="tw-bg-[#F7F7FA] lg:tw-pl-[260px] tw-pt-[60px] tw-min-h-screen tw-flex tw-flex-col tw-transition-all tw-duration-300 tw-ease-out [&:has([data-layout='sidebar'].open)]:tw-pl-0">
+  <div class="tw-fixed tw-flex tw-flex-col tw-z-[999] tw-left-0 tw-top-[60px] tw-bottom-0 tw-bg-white tw-w-[260px] tw-transition-all tw-duration-300 tw-ease-out -tw-translate-x-full [&.open]:-tw-translate-x-0 [&.open]:tw-shadow-2xl lg:-tw-translate-x-0 [&.open]:lg:-tw-translate-x-full [&.open]:lg:tw-shadow-none" data-layout="sidebar">
+ 
+    <div class="tw-overflow-y-auto tw-flex-auto tw-min-h-0 [&_ul]:tw-list-none [&_ul]:tw-p-0 [&_ul]:tw-m-0 [&_ul]:tw-flex [&_ul]:tw-flex-col [&_ul>li>a]:tw-flex [&_ul>li>a]:tw-gap-[5px] [&_ul>li>a]:tw-text-black [&_ul>li>a]:tw-h-[50px] [&_ul>li>a]:tw-cursor-pointer [&_ul>li:hover>a]:tw-bg-gray-100 [&_ul>li>a]:tw-relative [&_ul>li>a:before]:tw-content-[''] [&_ul>li>a:before]:tw-absolute [&_ul>li>a:before]:tw-left-0 [&_ul>li>a:before]:tw-top-0 [&_ul>li>a:before]:tw-w-[4px] [&_ul>li>a:before]:tw-h-full [&_ul>li>a:before]:tw-bg-primary [&_ul>li>a:before]:tw-rounded-r-full [&_ul>li>a:before]:tw-hidden [&_ul>li>a]:tw-no-underline [&_ul>li>a]:tw-items-center [&_ul>li>a]:tw-px-[20px] [&_ul>li>a]:!tw-text-[#6F6F6F] [&_ul>li>a>i]:tw-size-[24px] [&_ul>li>a>i]:tw-flex [&_ul>li>a>i]:tw-mr-[10px] [&_ul>li>a>i]:tw-items-center [&_ul>li>a>i]:tw-justify-center [&_ul>li>a>i]:tw-text-[18px] [&_ul>li>a>span]:tw-flex-auto [&_ul>li>a>span]:tw-truncate [&_ul>li>a>div]:tw-bg-red-400 [&_ul>li>a>div]:tw-text-white [&_ul>li>a>div]:tw-text-[12px] [&_ul>li>a>div]:tw-px-[6px] [&_ul>li>a>div]:tw-rounded-full [&_ul>li>a[data-bs-toggle='collapse']:after]:tw-content-['\f077'] [&_ul>li>a.collapsed[data-bs-toggle='collapse']:after]:tw-content-['\f078'] [&_ul>li>a[data-bs-toggle='collapse']:after]:tw-font-bold [&_ul>li>a[data-bs-toggle='collapse']:after]:tw-font-['Font_Awesome_6_Free'] [&_ul>li>ul]:tw-pl-[39px] [&_ul>li.active>a]:!tw-text-primary [&_ul>li.active>a:before]:!tw-block" data-menu="group">
+      <ul>
+        <li>
+          <a href="dashboard.html"><i class="fa fa-chart-simple"></i><span>Dashboard</span></a>
+        </li>
+        <li>
+          <a href="attendance.html"><i class="fa fa-book-open-reader"></i><span>Attendance</span></a>
+        </li>
+        <li>
+          <a data-bs-toggle="collapse" data-bs-target='[data-menu="l2"]' class="collapsed"><i class="fa fa-window-restore"></i><span>Practice Tests</span><div class="glare-effect">New</div></a>
+          <ul data-menu="l2" class="collapse" data-bs-parent='[data-menu="group"]'>
+            <li>
+              <a href="practice-assigned-tests.html"><span>Assigned Tests</span></a>
+            </li>
+            <li>
+              <a href="practice-completed-tests.html"><span>Completed Tests</span></a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a data-bs-toggle="collapse" data-bs-target='[data-menu="l3"]' class="collapsed"><i class="fa fa-rectangle-list"></i><span>Test Series</span><div class="glare-effect">New</div></a>
+          <ul data-menu="l3" class="collapse" data-bs-parent='[data-menu="group"]'>
+            <li>
+              <a href="series-assigned-tests.html"><span>Assigned Tests</span></a>
+            </li>
+            <li>
+              <a href="series-completed-tests.html"><span>Completed Tests</span></a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="daily-puzzles.html"><i class="fa fa-puzzle-piece"></i><span>Daily Puzzles</span></a>
+        </li>
+        <li>
+          <a href="download-pdfs.html"><i class="fa fa-file-pdf"></i><span>Downloaded PDFs</span></a>
+        </li>
+        <li>
+          <a href="courses.html"><i class="fa fa-book"></i><span>Courses</span></a>
+        </li>
+        <li>
+          <a href="live-sessions.html"><i class="fa fa-video"></i><span>Live Sessions</span> <div class="glare-effect">New</div></a
+          >
+        </li>
+        <li>
+          <a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a>
+        </li>
+        <li>
+          <a href="upload-question.html"><i class="fa fa-table-columns"></i><span>Upload Question</span></a>
+        </li>
+        <li>
+          <a href="certifications.html"><i class="fa fa-award"></i><span>Certifications</span></a>
+        </li>
+        <li>
+          <a onclick="logout()"><i class="fa fa-power-off"></i><span>Logout</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tw-fixed tw-left-0 tw-top-0 tw-right-0 tw-h-[60px] tw-bg-white tw-flex tw-items-center tw-gap-[0px] tw-z-[999]">
+    <div class="tw-flex-none tw-flex tw-items-center tw-gap-[10px] tw-px-[20px]">
+      <button type="button" class="btn btn-outline-secondary tw-size-[34px] tw-p-0 tw-ml-auto tw-flex tw-items-center tw-justify-center tw-border-gray-300 tw-bg-white" data-layout="toggle"><i class="fa"></i></button>
+      <img src="assets/images/logo.svg" class="tw-flex-col tw-max-w-full tw-h-[35px] tw-max-w-full" />
+    </div>
+    <div class="tw-flex-none tw-flex tw-gap-[10px] tw-items-center tw-ml-auto tw-px-[10px]">
+      <button type="button" class="btn btn-light btn-icon"><i class="far fa-bell"></i></button>
+      <div class="dropdown tw-flex tw-items-center tw-gap-[5px] tw-cursor-pointer">
+        <div class="tw-size-[40px] tw-bg-gray-300 tw-rounded-full tw-bg-cover tw-bg-center tw-bg-[url(assets/images/profile.avif)]" data-bs-toggle="dropdown"></div>
+        <i class="fa fa-chevron-down tw-text-[12px] tw-text-gray-400" data-bs-toggle="dropdown"></i>
+        <ul class="dropdown-menu tw-shadow-2xl tw-border-gray-300 tw-w-[250px] tw-py-[10px] [&_.dropdown-item]:tw-flex [&_.dropdown-item]:tw-items-center [&_.dropdown-item]:tw-h-[45px]">
+          <li>
+            <a class="dropdown-item" href="profile.html"><i class="fa fa-user tw-text-[20px] tw-mr-[15px] tw-text-gray-400"></i>Profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="change-password.html"><i class="fa fa-cog tw-text-[20px] tw-mr-[15px] tw-text-gray-400"></i>Change Password</a>
+          </li>
+          <li>
+            <a class="dropdown-item" onclick="logout()"><i class="fa fa-power-off tw-text-[20px] tw-mr-[15px] tw-text-gray-400"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="tw-flex-auto tw-flex tw-flex-col tw-border-[0px] tw-border-t tw-border-l tw-border-solid tw-border-[#F1F1F2] tw-p-[20px] lg:tw-p-[30px]"> 
+    
+<nav aria-label="breadcrumb" class="tw-flex-none">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item">Practice Tests</li>
+    <li class="breadcrumb-item active" aria-current="page">Completed Tests</li>
+  </ol>
+</nav>
+<div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-3 2xl:tw-grid-cols-3 tw-gap-[20px] lg:tw-gap-[30px]">
+   <!-- loop starts here -->
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e2.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">Letter Series</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">Practice Test - 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">5</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">5 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e1.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">Problems on Ages</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">Problems on Ages Test 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">15 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e3.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">Permutation &amp; Combination</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">P &amp; C Test 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">15 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e2.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">Coding &amp; Decoding</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">Coding &amp; Decoding Test 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">5</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e1.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">Averages &amp; Mixtures</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">Averages &amp; Mixtures Test 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e3.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">Ratio &amp; Proportions</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">Ratio &amp; Proportion - Test 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">5</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+    <img src="assets/images/e1.jpeg" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
+    <div class="tw-flex tw-flex-col">
+      <div class="tw-font-bold tw-text-[20px] tw-text-center">CryptArithmetic</div>
+      <div class="tw-text-center tw-text-[16px] tw-text-gray-500">Cryptarithmetic Test 1</div>
+      <div class="tw-flex tw-justify-center tw-my-[10px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">3</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">10 Mins</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
+  </div>
+  
+   <!-- loop ends here -->
+</div>
+
+  </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+  </body>
+</html>
