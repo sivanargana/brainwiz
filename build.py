@@ -4,11 +4,11 @@ import os
 import shutil
 from app import app;
 
-dist = 'dist'
+dist = 'docs'
 if os.path.exists(dist):
     shutil.rmtree(dist)
 os.makedirs(dist, exist_ok=True)
-shutil.copytree("src/assets","dist/assets")
+shutil.copytree("src/assets","docs/assets")
 with app.test_request_context():
     client= app.test_client()
     for filename in os.listdir("src/views"):
