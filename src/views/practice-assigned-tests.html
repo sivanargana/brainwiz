@@ -7,8 +7,12 @@
     <li class="breadcrumb-item active" aria-current="page">Assigned Tests</li>
   </ol>
 </nav>
+<div class="tw-p-[10px] tw-bg-gradient-to-r tw-from-blue-200 tw-to-gray-200 tw-rounded-[10px] tw-mb-[20px] tw-flex tw-items-center tw-gap-[20px]">
+  <img src="assets/images/icons8-education-96.png" class="tw-size-[60px] tw-object-contain" /> 
+  <span class="tw-text-[18px] tw-font-medium">Practice Tests to Learn More</span>
+</div>
 <div class="tw-flex tw-items-center tw-justify-start tw-gap-[20px] tw-mb-[15px]"> 
-  <div class="tw-bg-blue-200 tw-text-blue-500 tw-border-0 tw-border-l-[3px] tw-border-solid tw-border-blue-500 tw-text-[18px] tw-font-medium tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>Practice Tests to Learn More</div>
+  <div class="tw-bg-blue-200 tw-text-blue-500 tw-border-0 tw-border-l-[3px] tw-border-solid tw-border-blue-500 tw-text-[18px] tw-font-medium tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>My Tests</div>
 </div>
 <div class="tw-grid tw-grid-cols-12 tw-gap-[20px] lg:tw-gap-[30px]">
   <!-- loop starts here -->
@@ -23,9 +27,13 @@
           <div class="tw-font-bold tw-text-[18px] tw-text-center">{{ test.no_of_questions }}</div>
           <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
         </div>
-        <div class="tw-flex tw-flex-col tw-px-[20px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
           <div class="tw-font-bold tw-text-[18px] tw-text-center">{{ test.duration }} Mins</div>
           <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">5</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Marks</div>
         </div>
       </div>
     </div>
@@ -68,9 +76,13 @@
           <div class="tw-font-bold tw-text-[18px] tw-text-center">{{ test.no_of_questions }}</div>
           <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Questions</div>
         </div>
-        <div class="tw-flex tw-flex-col tw-px-[20px]">
+        <div class="tw-flex tw-flex-col tw-px-[20px] tw-border-0 tw-border-solid tw-border-r tw-border-gray-300">
           <div class="tw-font-bold tw-text-[18px] tw-text-center">{{ test.duration }} Mins</div>
           <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Duration</div>
+        </div>
+        <div class="tw-flex tw-flex-col tw-px-[20px]">
+          <div class="tw-font-bold tw-text-[18px] tw-text-center">5</div>
+          <div class="tw-text-[14px] tw-text-gray-400 tw-text-center">Marks</div>
         </div>
       </div>
     </div>
