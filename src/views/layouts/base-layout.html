@@ -21,7 +21,20 @@
         theme: {
           extend: {
             colors: {
-              primary: "var(--primary)",
+   
+  "primary-50": "color-mix(in srgb, var(--primary) 10%, white)",
+  "primary-100": "color-mix(in srgb, var(--primary) 20%, white)",
+  "primary-200": "color-mix(in srgb, var(--primary) 30%, white)",
+  "primary-300": "color-mix(in srgb, var(--primary) 40%, white)",
+  "primary-400": "color-mix(in srgb, var(--primary) 50%, white)",
+  "primary-500": "var(--primary)",
+  "primary-600": "color-mix(in srgb, var(--primary) 90%, black)",
+  "primary-700": "color-mix(in srgb, var(--primary) 80%, black)",
+  "primary-800": "color-mix(in srgb, var(--primary) 70%, black)",
+  "primary-900": "color-mix(in srgb, var(--primary) 60%, black)",
+  "primary-950": "color-mix(in srgb, var(--primary) 50%, black)",
+ 
+              "primary": "var(--primary)",
             },
           },
         },
@@ -111,13 +124,13 @@
             @apply !tw-border-0 tw-shadow-none;
             .accordion-header {
               .accordion-button {
-                @apply !tw-bg-blue-100/70 !tw-shadow-none !tw-text-[14px];
+                @apply !tw-bg-primary-100 !tw-shadow-none !tw-text-[14px];
                 &:after {
                   font-family: "Font Awesome 6 Free";
                   @apply tw-content-["\f063"] tw-font-bold tw-bg-none tw-flex tw-items-center tw-justify-center tw-text-[16px];
                 }
                 &:not(.collapsed){
-                  @apply !tw-bg-blue-900 !tw-text-white;
+                  @apply !tw-bg-primary-900 !tw-text-white;
                   &:after {  
                 }
                 }

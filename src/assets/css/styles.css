@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap');
 
 :root {
-  --primary: #3b82f6;
+  --primary: #ff0000;
+  --bs-primary: #e63946; 
+  /* --primary: #3b82f6; */
 }
 body {
   font-family: "Poppins", sans-serif;
@@ -19,7 +21,7 @@ a {
   font-family: "Antonio", sans-serif;
 
 }
-
+/* 
 
  
 .btn-primary {
@@ -42,12 +44,17 @@ a {
   --bs-btn-hover-bg: var(--primary);
   --bs-btn-active-bg: var(--primary);
 }
+.pagination{
+  --bs-pagination-active-bg:var(--primary);
+  --bs-pagination-active-border-color:var(--primary);
+ --bs-pagination-color:var(--primary);
+}
 .btn-link {
   --bs-btn-color: var(--primary);
   --bs-btn-hover-color: var(--primary);
   --bs-btn-active-color: var(--primary);
   text-decoration: none;
-}
+} */
 .form-control,
 .form-select {
    height: 48px;
