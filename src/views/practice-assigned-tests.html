@@ -8,12 +8,12 @@
   </ol>
 </nav>
 <div class="tw-flex tw-items-center tw-justify-start tw-gap-[20px] tw-mb-[15px]"> 
-  <div class="tw-bg-blue-400 tw-text-white tw-text-[20px] tw-font-semibold tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>Practice Tests to Learn More</div>
+  <div class="tw-bg-blue-400 tw-text-white tw-text-[18px] tw-font-semibold tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>Practice Tests to Learn More</div>
 </div>
 <div class="tw-grid tw-grid-cols-12 tw-gap-[20px] lg:tw-gap-[30px]">
   <!-- loop starts here -->
   {% for test in data %}
-  <div class="tw-col-span-4 tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+  <div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-4 tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
     <img src="assets/images/{{ test.image }}" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
     <div class="tw-flex tw-flex-col">
       <div class="tw-font-bold tw-text-[20px] tw-text-center">{{ test.topic }}</div>
@@ -32,9 +32,9 @@
     <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
   </div>
   {% if(loop.index == 1) %}
-<div class="tw-col-span-8">
+<div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-8">
     <div class="tw-bg-white tw-rounded-[10px] tw-shadow tw-h-full tw-flex tw-flex-col tw-justify-center tw-items-center">
-      <img src="assets/images/animation1.gif" class="tw-aspect-[1/.3] tw-w-full tw-h-full tw-object-contain" />
+      <img src="assets/images/animation1.gif" class="tw-aspect-[1/1]  md:tw-aspect-[1/1] xl:tw-aspect-[1/.3] tw-w-full tw-h-full tw-object-contain" />
     </div>
 </div>
   {% endif %}
@@ -53,12 +53,12 @@
   </ul>
 </nav>
 <div class="tw-flex tw-items-center tw-justify-start tw-gap-[20px] tw-my-[15px]"> 
-  <div class="tw-bg-blue-400 tw-text-white tw-text-[20px] tw-font-semibold tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>My Unattempted Tests </div>
+  <div class="tw-bg-blue-400 tw-text-white tw-text-[18px] tw-font-semibold tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>My Unattempted Tests </div>
 </div>
 <div class="tw-grid tw-grid-cols-12 tw-gap-[20px] lg:tw-gap-[30px]">
   <!-- loop starts here -->
   {% for test in data %}
-  <div class="tw-col-span-4  tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+  <div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-4 tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
     <img src="assets/images/{{ test.image }}" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
     <div class="tw-flex tw-flex-col">
       <div class="tw-font-bold tw-text-[20px] tw-text-center">{{ test.topic }}</div>
