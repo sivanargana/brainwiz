@@ -150,12 +150,20 @@
 }
 
 .bw-search{
-  @apply tw-flex tw-p-[5px] tw-border tw-border-solid tw-border-gray-300 tw-bg-white tw-rounded-full tw-w-[250px] tw-max-w-full;
+  @apply tw-flex tw-p-[5px] tw-border tw-border-solid tw-border-gray-300 tw-bg-white tw-rounded-full  tw-w-full md:tw-w-[250px] tw-max-w-full;
   input{
-    @apply tw-flex-auto tw-border-0 tw-bg-transparent tw-pl-[10px] tw-outline-none;
+    @apply tw-flex-auto tw-w-full tw-border-0 tw-bg-transparent tw-pl-[10px] tw-outline-none;
   }
   button{
     @apply tw-flex-none tw-size-[30px] tw-flex tw-items-center tw-justify-center tw-bg-primary tw-text-white tw-border-0 tw-rounded-full;
+  }
+}
+
+.bw-tabs{
+  .nav-item{
+    .nav-link{
+    
+    }
   }
 }
 
@@ -246,25 +254,25 @@
     
  
 <div class="tw-p-[10px] bg-white tw-shadow tw-rounded-[10px] tw-mb-[20px] tw-flex-col md:tw-flex-row tw-flex tw-items-center tw-gap-[20px]">
-  <img src="assets/images/icons8-education-96.png" class="tw-size-[60px] tw-object-contain" /> 
+  <img src="assets/images/icons8-education-96.png" class="tw-size-[60px] tw-object-contain tw-hidden md:tw-block" /> 
 <div class="tw-flex tw-flex-col tw-text-center md:tw-text-left">
     <span class="tw-text-[20px] tw-font-bold">My Practice Tests</span>
   <span class="tw-text-[14px] tw-font-normal tw-text-gray-400">Trach you performance in this course</span>
 </div>
-<div class="md:tw-ml-auto tw-text-[20px] tw-font-medium tw-text-gray-400">
-  3/60 Done | 5% Completed
+<div class="md:tw-ml-auto md:tw-text-[20px] tw-font-medium tw-text-gray-400">
+  <span>3/60 Done</span><span class="tw-border-0 tw-border-l-[3px] tw-mx-[10px] tw-border-solid tw-border-gray-300 tw-h-[50px]"></span><span>5% Completed</span>
 </div>
 </div>
 
 
-<ul class="nav nav-underline">
+<ul class="nav nav-underline bw-tabs">
   <li class="nav-item">
     <a class="nav-link active" id="practice-tab" data-bs-toggle="tab" data-bs-target="#practice-tab-pane">Practice (16)</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed-tab-pane">Completed (12)</a>
   </li>
- <div class="tw-ml-auto">
+ <div class="md:tw-ml-auto tw-w-full md:tw-w-auto">
   <div class="bw-search">
     <input type="text" placeholder="Search">
     <button type="button"><i class="fa fa-search"></i></button>
