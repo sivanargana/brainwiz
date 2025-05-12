@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3b82f6" />
+    <title>Brainwiz</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        prefix: "tw-",
+        corePlugins: {
+          preflight: false,
+        },
+        theme: {
+          extend: {
+            colors: {
+   
+  "primary-50": "color-mix(in srgb, var(--primary) 10%, white)",
+  "primary-100": "color-mix(in srgb, var(--primary) 20%, white)",
+  "primary-200": "color-mix(in srgb, var(--primary) 30%, white)",
+  "primary-300": "color-mix(in srgb, var(--primary) 40%, white)",
+  "primary-400": "color-mix(in srgb, var(--primary) 50%, white)",
+  "primary-500": "var(--primary)",
+  "primary-600": "color-mix(in srgb, var(--primary) 90%, black)",
+  "primary-700": "color-mix(in srgb, var(--primary) 80%, black)",
+  "primary-800": "color-mix(in srgb, var(--primary) 70%, black)",
+  "primary-900": "color-mix(in srgb, var(--primary) 60%, black)",
+  "primary-950": "color-mix(in srgb, var(--primary) 50%, black)",
+ 
+              "primary": "var(--primary)",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .bw-steper {
+          counter-reset: item;
+          @apply tw-list-none tw-p-0 tw-m-0 tw-flex;
+          li {
+            counter-increment: item;
+            @apply tw-relative tw-flex-auto tw-flex tw-justify-center;
+            &:before,
+            &:after {
+              @apply tw-content-[''] tw-absolute tw-top-1/2 -tw-translate-y-1/2 tw-h-px tw-w-[calc(50%-20px)] tw-bg-primary;
+            }
+            &:before {
+              @apply tw-left-0;
+            }
+            &:after {
+              @apply tw-right-0;
+            }
+            &:last-child {
+              &:after {
+                @apply tw-hidden;
+              }
+            }
+            &:first-child {
+              &:before {
+                @apply tw-hidden;
+              }
+            }
+            > span {
+              @apply tw-flex tw-relative tw-z-[5] tw-items-center tw-justify-center tw-size-[40px] tw-rounded-full  tw-border tw-border-solid tw-border-primary;
+            }
+            &:not(.active) {
+              span {
+                @apply tw-bg-primary tw-text-white;
+                &:after {
+                  font-family: "Font Awesome 6 Free";
+                  @apply tw-content-["\f00c"] tw-font-bold;
+                }
+              }
+            }
+            &.active,
+            &.active ~ li {
+              span {
+                @apply tw-bg-transparent tw-text-primary;
+                &:after {
+                  @apply tw-content-[counter(item)];
+                }
+              }
+            }
+            &.active {
+              span {
+                @apply !tw-bg-primary !tw-text-white tw-shadow-[0_0_0_3px_white,0_0_0_5px_var(--primary)];
+              }
+            }
+          }
+        }
+        .page-title-bw {
+          @apply tw-flex tw-flex-col tw-items-center tw-gap-[10px] [&:before]:tw-block [&:before]:tw-content-[''] [&:before]:tw-w-[60px]  [&:before]:tw-h-[3px] [&:before]:tw-bg-[#fdab22];
+        }
+        .btn-icon {
+          @apply tw-size-[40px] tw-rounded-full tw-p-0 tw-flex tw-items-center tw-justify-center tw-text-[20px];
+        }
+        .btn-bw {
+          @apply tw-inline-flex tw-items-center tw-gap-[10px] tw-rounded-[5px] tw-px-[30px] tw-h-[44px];
+        }
+        .floating-label {
+          @apply tw-relative;
+        }
+        .floating-label label {
+          @apply tw-text-[14px] tw-px-[2px] tw-transition-all tw-duration-300 tw-ease-out tw-absolute tw-top-1/2 -tw-translate-y-1/2 tw-left-[10px] tw-bg-white;
+        }
+        .floating-label textarea + label {
+          @apply tw-top-[20%];
+        }
+        .floating-label .form-control:focus + label,
+        .floating-label .form-control:not(:placeholder-shown) + label {
+          @apply tw-top-0 tw-text-[12px];
+        }
+        #faqaccordian {
+          @apply tw-flex tw-flex-col tw-gap-[0px] tw-rounded-[7px] tw-shadow;
+          .accordion-item {
+            @apply !tw-border-0 tw-shadow-none;
+            .accordion-header {
+              .accordion-button {
+                @apply !tw-bg-primary-100 !tw-shadow-none !tw-text-[14px];
+                &:after {
+                  font-family: "Font Awesome 6 Free";
+                  @apply tw-content-["\f063"] tw-font-bold tw-bg-none tw-flex tw-items-center tw-justify-center tw-text-[16px];
+                }
+                &:not(.collapsed){
+                  @apply !tw-bg-primary-900 !tw-text-white;
+                  &:after {  
+                }
+                }
+              }
+            }
+          }
+        }
+      }
+   
+.bw-pagination{
+  @apply tw-gap-[10px] tw-m-0;
+  .page-item{
+    .page-link{
+      @apply tw-size-[42px] !tw-rounded-[10px] tw-flex tw-items-center tw-justify-center;
+    }
+  }
+}
+
+.bw-search{
+  @apply tw-flex tw-p-[5px] tw-border tw-border-solid tw-border-gray-300 tw-bg-white tw-rounded-full tw-w-[250px] tw-max-w-full;
+  input{
+    @apply tw-flex-auto tw-border-0 tw-bg-transparent tw-pl-[10px] tw-outline-none;
+  }
+  button{
+    @apply tw-flex-none tw-size-[30px] tw-flex tw-items-center tw-justify-center tw-bg-primary tw-text-white tw-border-0 tw-rounded-full;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    
+<header class="tw-fixed tw-px-[12px] tw-top-0 tw-left-0 tw-right-0 tw-z-[99] [&.active]:tw-bg-white/70 [&.active]:tw-backdrop-blur-md [&.active]:tw-shadow-lg tw-transition-all tw-duration-300 tw-ease-out">
+  <div class="tw-max-w-[1280px] tw-mx-auto tw-h-[70px] tw-flex tw-items-center">
+    <a href="index.html"><img src="assets/images/bw_logo.svg" class="tw-h-[40px]" /></a>
+    <ul class="tw-hidden lg:tw-flex tw-list-none tw-m-0 tw-ml-auto [&>li>a]:tw-flex [&>li>a]:tw-items-center [&>li>a]:tw-gap-[3px] [&>li>a]:tw-py-[10px] [&>li>a]:tw-no-underline [&>li>a]:tw-text-gray-800 [&>li>a]:tw-px-[10px] [&>li:hover>a]:tw-text-primary-500">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about-us.html">About us</a></li>
+      <li class="tw-relative [&:hover>ul]:tw-block">
+        <a href="#">Courses <i class="fa fa-caret-down"></i></a>
+        <ul class="tw-hidden tw-absolute tw-top-full tw-left-0 tw-list-none tw-bg-primary-500 tw-text-white tw-p-0 tw-py-[10px] tw-m-0 tw-w-[200px] tw-rounded-[10px] [&>li>a]:tw-flex [&>li>a]:tw-px-[10px] [&>li>a]:tw-py-[5px] [&>li>a]:tw-no-underline [&>li>a]:tw-text-white [&>li:hover>a]:tw-bg-black/20">
+          <li><a href="#">CRT</a></li>
+          <li><a href="#">Online CRT Course</a></li>
+          <li><a href="#">AMCAT</a></li>
+          <li><a href="#">E-Litmus</a></li>
+          <li><a href="#">E-Litmus questions</a></li>
+          <li><a href="#">CoCubes</a></li>
+          <li><a href="#">Classroom Training</a></li>
+          <li><a href="#">Online Training</a></li>
+          <li><a href="#">Campus Connect</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Videos</a></li>
+      <li><a href="#">Test Series</a></li>
+      <li><a href="#">Buy Now</a></li>
+    </ul>
+    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" class="btn btn-outline-secondary tw-size-[40px] tw-p-0 tw-ml-auto tw-flex tw-items-center tw-justify-center lg:tw-hidden tw-border-gray-300 tw-bg-white"><i class="fa fa-bars"></i></button>
+    <a href="login.html" class="btn btn-primary tw-ml-[10px] tw-rounded-full tw-px-[20px] tw-hidden lg:tw-flex">Login</a>
+  </div>
+</header>
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="icon-uniE910" viewBox="0 0 32 32">
+      <path
+        d="M2 29.344v0 0q0-0.094 0.031-0.188t0.094-0.156v0l0.219-0.344q0.313-0.469 0.484-1.031t0.172-1.188v0 0 0-10.125q0-1.813 0.906-3.313t2.406-2.344h0.031l-1.344 5.719v0.125q0 0.219 0.141 0.359t0.359 0.141v0 0h2q0.188 0 0.313-0.109t0.188-0.266v0l0.5-2.25 0.5 2.25q0.063 0.156 0.188 0.266t0.313 0.109v0 0h2q0.219 0 0.359-0.141t0.141-0.359v-0.125l-1.344-5.719q1.5 0.844 2.422 2.344t0.922 3.313v0 0 0 3.688h1v-3.688q0-2.063-1.031-3.781t-2.719-2.688l-0.031-0.031q0.375-0.594 0.578-1.313t0.203-1.5v0 0 0-2.5q0-0.219-0.141-0.359t-0.359-0.141h-3.5v1h3v2q0 0.688-0.203 1.328t-0.578 1.172v0h-3.438l-0.031-0.031q-0.344-0.5-0.547-1.141t-0.203-1.328v0 0 0-0.5h-1v0.5q0 0.781 0.203 1.5t0.578 1.344v-0.031q-1.719 1-2.75 2.719t-1.031 3.781v0 10.125q0 0.469-0.141 0.891t-0.359 0.797v-0.031l-0.219 0.344q-0.125 0.188-0.203 0.422t-0.078 0.484q0 0.688 0.484 1.172t1.172 0.484h10.844v-1h-10.844q-0.281 0-0.469-0.188t-0.188-0.469v0 0zM7.094 16h-0.969l1.281-5.5h0.969zM9.906 16l-0.906-3.844 0.406-1.656h0.188l1.281 5.5h-0.969zM29.25 18.281q-0.75-0.375-1.719-0.578t-2.031-0.203-2.031 0.203-1.719 0.578q-0.844 0.438-1.297 1t-0.453 1.219q0 0.344 0.125 0.656t0.344 0.594q-0.219 0.281-0.344 0.609t-0.125 0.641q0 0.344 0.125 0.656t0.344 0.594q-0.219 0.281-0.344 0.609t-0.125 0.641q0 0.344 0.125 0.656t0.344 0.594q-0.219 0.281-0.344 0.609t-0.125 0.641q0 0.656 0.453 1.219t1.297 1q0.75 0.375 1.719 0.578t2.031 0.203 2.031-0.203 1.719-0.578q0.844-0.438 1.297-1t0.453-1.219q0-0.313-0.125-0.641t-0.344-0.609q0.219-0.281 0.344-0.594t0.125-0.656q0-0.313-0.125-0.641t-0.344-0.609q0.219-0.281 0.344-0.594t0.125-0.656q0-0.313-0.125-0.641t-0.344-0.609q0.219-0.281 0.344-0.594t0.125-0.656q0-0.656-0.453-1.219t-1.297-1zM30 23q0 0.719-1.25 1.359t-3.25 0.641-3.25-0.641-1.25-1.359q0-0.156 0.063-0.313t0.156-0.281v0q0.125 0.094 0.25 0.156l0.25 0.125 0.031 0.031q0.75 0.375 1.719 0.578t2.031 0.203 2.031-0.203 1.719-0.578q0.156-0.094 0.297-0.156t0.234-0.156v0q0.094 0.125 0.156 0.281t0.063 0.313v0 0zM30 25.5q0 0.719-1.25 1.359t-3.25 0.641-3.25-0.641-1.25-1.359q0-0.156 0.063-0.313t0.156-0.281v0q0.125 0.094 0.25 0.156l0.25 0.125 0.031 0.031q0.75 0.375 1.719 0.578t2.031 0.203 2.031-0.203 1.719-0.578q0.156-0.094 0.297-0.156t0.234-0.156v0q0.094 0.125 0.156 0.281t0.063 0.313v0 0zM25.5 18.5q2 0 3.25 0.641t1.25 1.359-1.25 1.359-3.25 0.641-3.25-0.641-1.25-1.359 1.25-1.359 3.25-0.641zM25.5 30q-2 0-3.25-0.641t-1.25-1.359q0-0.156 0.063-0.313t0.156-0.281v0q0.125 0.094 0.25 0.156l0.25 0.125 0.031 0.031q0.75 0.375 1.719 0.578t2.031 0.203 2.031-0.203 1.719-0.578q0.156-0.094 0.297-0.156t0.234-0.156v0q0.094 0.125 0.156 0.281t0.063 0.313v0q0 0.719-1.25 1.359t-3.25 0.641v0zM29 1h-13q-0.813 0-1.406 0.594t-0.594 1.406v8h1v-8q0-0.406 0.297-0.703t0.703-0.297h11.281q-0.125 0.219-0.203 0.469t-0.078 0.531v0 0 0 13.5h1v-12h2.5q0.219 0 0.359-0.141t0.141-0.359v0-1q0-0.813-0.594-1.406t-1.406-0.594v0zM30 3.5h-2v-0.5q0-0.406 0.297-0.703t0.703-0.297 0.703 0.297 0.297 0.703v0 0.5zM23 5q0-0.844-0.578-1.422t-1.422-0.578-1.422 0.578-0.578 1.422 0.578 1.422 1.422 0.578v0q0.813 0 1.406-0.594t0.594-1.406v0zM20 5q0-0.406 0.297-0.703t0.703-0.297 0.703 0.297 0.297 0.703-0.297 0.703-0.703 0.297v0q-0.406 0-0.703-0.297t-0.297-0.703v0zM18 8h6v1h-6v-1zM16.5 10h4v1h-4v-1zM21.5 10h4v1h-4v-1zM16.5 12h9v1h-9v-1zM16.5 14h9v1h-9v-1zM1.5 4.5q0.813 0 1.406 0.594t0.594 1.406v0q0 0.219 0.141 0.359t0.359 0.141 0.359-0.141 0.141-0.359v0q0-0.813 0.594-1.406t1.406-0.594v0q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0q-0.813 0-1.406-0.594t-0.594-1.406v0q0-0.219-0.141-0.359t-0.359-0.141-0.359 0.141-0.141 0.359v0q0 0.813-0.594 1.406t-1.406 0.594v0q-0.219 0-0.359 0.141t-0.141 0.359 0.141 0.359 0.359 0.141v0zM4 3.156q0.156 0.25 0.375 0.469t0.469 0.375v0q-0.25 0.156-0.469 0.375t-0.375 0.469v0q-0.156-0.25-0.375-0.469t-0.469-0.375v0q0.25-0.156 0.469-0.375t0.375-0.469v0zM12.375 19.188q-0.063-0.094-0.156-0.141t-0.219-0.047q-0.156 0-0.266 0.078t-0.172 0.203v0l-2.094 4.156-1.531-2.688q-0.063-0.125-0.188-0.188t-0.25-0.063q-0.156 0-0.281 0.078t-0.156 0.203h-0.031l-3 6.5 0.938 0.438 2.594-5.625 1.5 2.656q0.063 0.125 0.188 0.188t0.25 0.063q0.156 0 0.266-0.078t0.172-0.203v0l2.156-4.313 2.031 2.406q0.063 0.094 0.156 0.141t0.219 0.047 0.219-0.047 0.156-0.109v0l4-4.5-0.75-0.688-3.625 4.063zM16.5 16h5.5v1h-5.5v-1zM17 30q-1.25 0-2.125-0.875t-0.875-2.125 0.875-2.125 2.125-0.875q0.469 0 0.906 0.141t0.813 0.391v0l0.563-0.813q-0.469-0.344-1.047-0.531t-1.234-0.188q-1.656 0-2.828 1.172t-1.172 2.828 1.172 2.828 2.828 1.172q0.844 0 1.578-0.328t1.266-0.859v0l-0.688-0.719q-0.406 0.438-0.969 0.672t-1.188 0.234v0 0 0 0zM17 26v0 0q0.188 0 0.359 0.063t0.297 0.188v0l0.688-0.75q-0.281-0.219-0.625-0.359t-0.719-0.141q-0.844 0-1.422 0.578t-0.578 1.422q0 0.375 0.141 0.719t0.359 0.625v0l0.75-0.688q-0.125-0.125-0.188-0.297t-0.063-0.359q0-0.406 0.297-0.703t0.703-0.297v0 0z"
+      ></path>
+    </symbol>
+    <symbol id="icon-uniE911" viewBox="0 0 32 32">
+      <path
+        d="M26.813 24.813l-10.469-3.438q0.063-0.531-0.172-1.031t-0.641-0.813q-0.438-0.344-0.969-0.422t-1.031 0.109l-7.313-6.313q-0.094-0.063-0.203-0.094t-0.234-0.031q-0.125 0.031-0.219 0.094t-0.156 0.188l-0.813 1.406q-1.125-0.406-2.219 0t-1.688 1.406l-0.25 0.469q-0.344 0.531-0.422 1.172t0.109 1.266q0.156 0.625 0.547 1.125t0.953 0.813l8.125 4.188q-0.094 0.469 0 0.938t0.406 0.844l-1.688 2.906q-0.063 0.156-0.063 0.313t0.094 0.281q0.125 0.125 0.266 0.188t0.297 0l1.688-0.438 0.438 1.656q0.031 0.156 0.156 0.266t0.281 0.141h0.094q0.125 0 0.25-0.078t0.188-0.172l2.313-4 5.594 3.625q0.563 0.313 1.188 0.391t1.25-0.078 1.125-0.547 0.813-0.953l0.281-0.438 2.406-4.156q0.063-0.125 0.063-0.234t-0.031-0.234q-0.063-0.125-0.141-0.203t-0.203-0.109v0zM14.75 20.313q0.406 0.219 0.516 0.641t-0.109 0.797l-2.406 4.156q-0.219 0.406-0.641 0.516t-0.797-0.109q-0.406-0.219-0.516-0.641t0.109-0.828l2.406-4.156q0.094-0.188 0.266-0.313t0.391-0.188q0.188-0.031 0.406-0.016t0.375 0.141v0zM6 14.156l5.344 4.594-5.844-3.75zM1.125 18.5q-0.094-0.406-0.047-0.828t0.266-0.797l0.281-0.469q0.438-0.75 1.281-0.984t1.594 0.203l7.656 4.938-1.938 3.375-8.094-4.156q-0.375-0.219-0.625-0.547t-0.375-0.734v0zM11.875 30.094l-0.25-0.938q-0.031-0.219-0.234-0.328t-0.422-0.047l-0.938 0.25 0.969-1.688q0.563 0.25 1.172 0.141t1.078-0.516l0.313 0.219zM20.625 30.469l-6.75-4.375 2-3.469 7.125 3.656q0.781 0.469 1 1.313t-0.219 1.625l-0.25 0.438q-0.438 0.781-1.281 1.016t-1.625-0.203zM24.969 27.156q-0.188-0.563-0.563-1.031t-0.875-0.781l-2.781-1.406 5.094 1.688zM31.313 5.875l0.656-2.063q0.063-0.188-0.016-0.359t-0.234-0.266l-1.938-0.969-0.969-1.938q-0.094-0.156-0.266-0.234t-0.359-0.016l-2.063 0.656-2.031-0.656q-0.188-0.063-0.375 0.016t-0.281 0.266l-0.969 1.906-1.906 0.969h-0.016t-0.016 0.031h-9.344q-1.094 0-1.875 0.781t-0.781 1.875v7.344q0 0.219 0.156 0.375t0.375 0.156 0.375-0.156 0.156-0.375v-7.344q0-0.656 0.469-1.125t1.125-0.469h9.25l0.5 1.594-0.656 2.031q-0.063 0.188 0.016 0.375t0.266 0.281l1.906 0.969 0.969 1.906q0.094 0.188 0.281 0.266t0.375 0.016l2.031-0.656 0.531 0.156v11.719q0 0.219 0.156 0.375t0.375 0.156 0.375-0.156 0.156-0.375v-11.375l0.469 0.156q0.188 0.063 0.359-0.016t0.266-0.266l0.969-1.906 1.938-0.969q0.156-0.094 0.234-0.281t0.016-0.375zM30.25 6.031l0.563 1.781-1.656 0.844q-0.063 0.031-0.125 0.094t-0.094 0.156l-0.875 1.656-1.781-0.594h-0.313l-1.781 0.594-0.844-1.656q-0.031-0.094-0.094-0.156t-0.156-0.094l-1.656-0.844 0.594-1.781v-0.313l-0.594-1.781 1.656-0.844q0.094-0.063 0.156-0.109t0.094-0.141l0.844-1.656 1.781 0.563q0.094 0.031 0.172 0.031t0.141-0.031l1.781-0.563 0.844 1.656q0.063 0.094 0.125 0.141t0.125 0.109l1.656 0.844-0.563 1.781q-0.031 0.063-0.031 0.156t0.031 0.156v0zM26.125 3.219q-1.094 0-1.875 0.781t-0.781 1.875 0.781 1.875 1.875 0.781q1.125 0 1.906-0.781t0.781-1.875q-0.031-1.094-0.797-1.875t-1.891-0.781zM26.125 7.469q-0.656 0-1.125-0.469t-0.469-1.125 0.469-1.125 1.125-0.469 1.125 0.469 0.469 1.125-0.469 1.125-1.125 0.469zM13.344 13.875h9.063q0.219 0 0.375-0.156t0.156-0.375-0.156-0.375-0.375-0.156h-9.063q-0.219 0-0.375 0.156t-0.156 0.375 0.156 0.375 0.375 0.156v0zM22.406 15.469h-7.469q-0.219 0-0.375 0.156t-0.156 0.375 0.156 0.375 0.375 0.156h7.469q0.219 0 0.375-0.156t0.156-0.375-0.156-0.375-0.375-0.156zM22.406 18.125h-3.75q-0.219 0-0.375 0.156t-0.156 0.375 0.156 0.375 0.375 0.156h3.75q0.219 0 0.375-0.156t0.156-0.375-0.156-0.375-0.375-0.156zM14.406 8.531h3.188q0.219 0 0.375-0.156t0.156-0.375-0.156-0.375-0.375-0.156h-3.188q-0.656 0-1.125 0.469t-0.469 1.125 0.469 1.125 1.125 0.469h3.188q0.219 0 0.375-0.156t0.156-0.375-0.156-0.375-0.375-0.156h-3.188q-0.219 0-0.375-0.156t-0.156-0.375 0.156-0.375 0.375-0.156v0z"
+      ></path>
+    </symbol>
+    <symbol id="icon-uniE912" viewBox="0 0 32 32">
+      <path
+        d="M27.5 15.5h-2q-0.219 0-0.359-0.141t-0.141-0.359v0 0 0-0.281q0.875-0.531 1.484-1.375t0.859-1.844v-0.031q0.719-0.125 1.188-0.688t0.469-1.281q0-0.688-0.422-1.219t-1.078-0.719v0-2.063q0-1.375-0.922-2.375t-2.266-1.125h-0.031q-0.313-0.438-0.813-0.719t-1.094-0.281v0 0h-1.875q-1.875 0-3.188 1.313t-1.313 3.188v1.5q0 0.219 0.141 0.359t0.359 0.141v0h0.5v0.063q-0.656 0.188-1.078 0.719t-0.422 1.219q0 0.719 0.469 1.281t1.156 0.688h0.031q0 0.094 0.031 0.156l0.969-0.25q-0.094-0.25-0.125-0.531t-0.031-0.594v0 0 0-2.75q1.563-0.094 2.984-0.531t2.672-1.156l-0.063 0.031q0.219 0.781 0.781 1.391t1.344 0.859h0.031l0.75 0.281v1.875q0 1.75-1.25 3t-3 1.25q-0.688 0-1.313-0.203t-1.156-0.578v0l-0.563 0.813q0.156 0.125 0.344 0.234t0.406 0.203l0.031 0.031q0 0.219-0.141 0.359t-0.359 0.141h-0.5v-1.5q0-0.813-0.594-1.406t-1.406-0.594h-14q-0.813 0-1.406 0.594t-0.594 1.406v1.5h1v-1.5q0-0.406 0.297-0.703t0.703-0.297h14q0.406 0 0.703 0.297t0.297 0.703v9q0 0.406-0.297 0.703t-0.703 0.297h-5.531l0.531-2.406v-0.094q0-0.219-0.141-0.359t-0.359-0.141h-3.5q-0.156 0-0.281 0.078t-0.188 0.234v0l-1.156 2.688h-3.375q-0.406 0-0.703-0.297t-0.297-0.703v-6.5h-1v6.5q0 0.813 0.578 1.406t1.422 0.594h2.969l-1.313 3h-3.156q-0.219 0-0.359 0.141t-0.141 0.359v0 2q0 0.219 0.141 0.359t0.359 0.141v0h29q0.219 0 0.359-0.141t0.141-0.359v0-2q0-0.219-0.141-0.359t-0.359-0.141v0h-0.844q0.625-0.563 0.984-1.328t0.359-1.672v0 0 0-0.5h-1v0.5q0 1.25-0.875 2.125t-2.125 0.875h-8v-1q0-0.625 0.438-1.063t1.063-0.438h6.5q0.219 0 0.359-0.141t0.141-0.359v0-3.5h2.5v2h1v-4.5q0-1.438-1.031-2.469t-2.469-1.031v0 0zM27.5 10.25v-1.625q0.219 0.156 0.359 0.375t0.141 0.5q0 0.219-0.078 0.391t-0.203 0.328v0q-0.063 0.031-0.109 0.078t-0.109 0.078v0-0.125zM16.5 9.5v0 0q0-0.219 0.078-0.391t0.203-0.328v0q0.063-0.031 0.109-0.078t0.109-0.078v0 1.75q-0.219-0.156-0.359-0.375t-0.141-0.5v0zM23.5 4.719q-1.281 0.844-2.844 1.313t-3.25 0.469v0 0h-0.406v-0.563q3.219-0.406 4.516-1.219t1.328-0.875l-0.688-0.688-0.297 0.219t-0.953 0.531q-0.563 0.25-1.516 0.531t-2.328 0.5q0.031-0.281 0.109-0.516t0.172-0.453v0.031q1.406-0.031 2.125-0.281t0.75-0.281l-0.438-0.875-0.422 0.141t-1.234 0.234q0.469-0.438 1.078-0.688t1.297-0.25v0 0h1.875q0.375 0 0.656 0.172t0.469 0.453v0 2.094zM26.063 7.156q-0.688-0.219-1.125-0.813t-0.438-1.344v0 0 0-1.938q0.875 0.156 1.438 0.844t0.563 1.594v1.813zM20.969 15.344q0.281 0.063 0.609 0.109t0.672 0.047q0.469 0 0.922-0.078t0.891-0.234h-0.063q0.031 0.25 0.156 0.484t0.281 0.391v0q0.063 0.063 0.125 0.109t0.125 0.078v0l-0.156 0.188q-0.344 0.5-0.891 0.781t-1.203 0.281q-0.688 0-1.266-0.328t-0.922-0.859h-0.031q0.281-0.156 0.469-0.406t0.281-0.563v0zM18 27v1h-2.5v-1h2.5zM16.938 25h0.063q0.125 0 0.266-0.016t0.234-0.047v0 1.063h-0.969zM12.938 25h2.938l-0.406 1h-0.469q-0.219 0-0.359 0.141t-0.141 0.359v0 1.5h-1v-1.5q0-0.219-0.141-0.359t-0.359-0.141v0h-0.469zM11.25 25h0.625l-0.406 1h-0.406zM12.5 27v1h-1.875l0.219-1h1.656zM8.344 22h2.531l-1.281 6h-3.844zM30 29v1h-28v-1h28zM30 20.5h-2.5v-1.5h-1v5.5h-6q-0.625 0-1.141 0.266t-0.859 0.734v0-1.188q0.219-0.25 0.359-0.594t0.141-0.719v0 0 0-6.5h0.188q0.469 0.906 1.328 1.453t1.922 0.547q0.875 0 1.641-0.391t1.266-1.047v0l0.406-0.563h1.75q1.031 0 1.766 0.734t0.734 1.766v0 1.5zM24.469 19.063l0.438 0.875q-0.531 0.281-1.141 0.422t-1.266 0.141q-0.75 0-1.453-0.203t-1.328-0.547h0.031l0.5-0.844q0.469 0.281 1.047 0.438t1.203 0.156q0.531 0 1.031-0.125t0.969-0.344l-0.031 0.031zM21 9q0 0.406-0.297 0.703t-0.703 0.297-0.703-0.297-0.297-0.703 0.297-0.703 0.703-0.297v0q0.406 0 0.703 0.297t0.297 0.703v0zM23 9q0-0.406 0.297-0.703t0.703-0.297 0.703 0.297 0.297 0.703-0.297 0.703-0.703 0.297v0q-0.406 0-0.703-0.297t-0.297-0.703v0zM23.219 10.625l0.563 0.844q-0.375 0.25-0.828 0.391t-0.953 0.141-0.953-0.141-0.828-0.391v0l0.563-0.844q0.25 0.188 0.563 0.281t0.656 0.094 0.656-0.094 0.594-0.281h-0.031zM8 15.5h-2v-1h2v1zM11 14.5v1h-2v-1h2zM14 14.5v1h-2v-1h2zM17 15.5h-2v-1h2v1zM5 14.5v1h-2v-1h2z"
+      ></path>
+    </symbol>
+    <symbol id="icon-uniE913" viewBox="0 0 32 32">
+      <path
+        d="M29.5 4.5h-6v-2q0-0.219-0.141-0.359t-0.359-0.141q-0.063 0-0.125 0.016t-0.125 0.047v0l-2.75 1.563v-1.125q0-0.219-0.141-0.359t-0.359-0.141v0h-10.5q-0.219 0-0.359 0.141t-0.141 0.359v0 2h-6q-0.813 0-1.406 0.594t-0.594 1.406v17q0 0.813 0.594 1.406t1.406 0.594h10.313l-0.688 2h-1.625q-0.219 0-0.359 0.141t-0.141 0.359v0 1.5q0 0.219 0.141 0.359t0.359 0.141v0h11q0.219 0 0.359-0.141t0.141-0.359v0-1.5q0-0.219-0.141-0.359t-0.359-0.141v0h-1.625l-0.688-2h10.313q0.813 0 1.406-0.594t0.594-1.406v-17q0-0.813-0.594-1.406t-1.406-0.594v0zM20 4.781l2.5-1.406v6.25l-2.5-1.406v-3.438zM9.5 3h9.5v7h-9.5v-7zM21 28.5v0.5h-10v-0.5h10zM13.188 27.5l0.688-2h4.25l0.688 2h-5.625zM30.5 23.5q0 0.406-0.297 0.703t-0.703 0.297h-27q-0.406 0-0.703-0.297t-0.297-0.703v-1h29v1zM30.5 21.5h-29v-15q0-0.406 0.297-0.703t0.703-0.297h6v5q0 0.219 0.141 0.359t0.359 0.141v0h10.5q0.219 0 0.359-0.141t0.141-0.359v0-1.125l2.75 1.563q0.063 0.031 0.125 0.047t0.125 0.016q0.219 0 0.359-0.141t0.141-0.359v0 0 0-5h6q0.406 0 0.703 0.297t0.297 0.703v0 15zM6 23h-3q-0.219 0-0.359 0.141t-0.141 0.359 0.141 0.359 0.359 0.141v0h3q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0zM8 23h-0.5q-0.219 0-0.359 0.141t-0.141 0.359 0.141 0.359 0.359 0.141v0h0.5q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0zM10 19.5h12q0.813 0 1.406-0.594t0.594-1.406v-3.5q0-0.813-0.594-1.406t-1.406-0.594h-12q-0.813 0-1.406 0.594t-0.594 1.406v3.5q0 0.813 0.594 1.406t1.406 0.594v0zM9 14q0-0.406 0.297-0.703t0.703-0.297h12q0.406 0 0.703 0.297t0.297 0.703v3.5q0 0.406-0.297 0.703t-0.703 0.297h-12q-0.406 0-0.703-0.297t-0.297-0.703v0-3.5zM10.5 18h2q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0h-1.5v-3q0-0.219-0.141-0.359t-0.359-0.141-0.359 0.141-0.141 0.359v0 3.5q0 0.219 0.141 0.359t0.359 0.141v0zM14 18q0.219 0 0.359-0.141t0.141-0.359v0-3.5q0-0.219-0.141-0.359t-0.359-0.141-0.359 0.141-0.141 0.359v0 3.5q0 0.219 0.141 0.359t0.359 0.141v0zM19.5 18h2q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0h-1.5v-1h0.5q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0h-0.5v-0.5h1.5q0.219 0 0.359-0.141t0.141-0.359-0.141-0.359-0.359-0.141v0h-2q-0.219 0-0.359 0.141t-0.141 0.359v0 3.5q0 0.219 0.141 0.359t0.359 0.141v0zM16.531 17.625q0.031 0.156 0.172 0.266t0.297 0.109 0.297-0.109 0.172-0.234v-0.031l1-3.5q0.031-0.031 0.031-0.063v-0.063q0-0.219-0.141-0.359t-0.359-0.141q-0.156 0-0.297 0.109t-0.172 0.234v0.031l-0.531 1.813-0.531-1.813q-0.031-0.156-0.172-0.266t-0.297-0.109q-0.219 0-0.359 0.141t-0.141 0.359v0.063t0.031 0.094v-0.031z"
+      ></path>
+    </symbol>
+  </defs>
+</svg>
+
+<section class="tw-bg-gradient-to-b tw-from-[#fff4f6] tw-to-[#f6d5f7] tw-flex tw-flex-col tw-justify-center tw-px-[12px] tw-py-[70px]">
+  <div class="tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 md:tw-gap-[80px] tw-items-center">
+      <div >
+        <div class="tw-w-[500px] tw-max-w-full tw-mx-auto lg:tw-mx-0 tw-bg-white/50 tw-shadow-[0_0_12px_rgba(0,0,0,0.2)] tw-p-[15px] md:tw-p-[30px] tw-rounded-[20px] tw-flex tw-flex-col tw-gap-[8px]">
+          <h1 class="tw-text-[20px] md:tw-text-[24px] tw-font-medium">Like to know about CRT Course ?</h1>
+        <div class="tw-flex tw-flex-col tw-gap-[15px]">
+          <div class="floating-label">
+            <input type="text" class="form-control" id="name" placeholder=" " />
+            <label for="name">Write your name</label>
+          </div>
+          <div class="floating-label">
+            <input type="text" class="form-control" id="phone" placeholder=" " />
+            <label for="phone">Phone Number</label>
+          </div>
+          <div class="floating-label">
+            <input type="email" class="form-control" id="email" placeholder=" " />
+            <label for="email">Email address</label>
+          </div>
+          <div class="floating-label">
+            <textarea class="form-control tw-h-[100px]" placeholder=" " id="query"  ></textarea>
+            <label for="query">Write Query</label>
+          </div>
+          <button type="button" class="btn btn-warning tw-w-full" onclick="send()">Submit</button>
+        </div>
+        </div>
+      </div>
+      <div>
+        <img class="tw-block tw-w-[500px] tw-max-w-full tw-mx-auto"  src="assets/images/kids-studying-from-home-animate.svg" />
+        <h2 class="tw-text-[32px] tw-font-bold"  >Prepare yourself to get hired in the top tech companies easily</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-bg-white tw-px-[12px] tw-py-[50px]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Courses We Offered</h3>
+      <p class="tw-w-[500px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Brainwiz includes everything that a candidate requires to progress from the level of a fresher to become a skillful employee. Catch a glimpse of what can make you employment-ready!</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-3 tw-gap-[20px]">
+      
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/campus_recruiting.jpg" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Campus Recruitment Training</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">This Course will be helpful for Students who are going to appear for any Job Placement/Interview like Infosys, TCS NQT, CapGemini, Accenture, Oracle and many more</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹3500.00</div> -->
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/core_java.jpg" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Core Java</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">Learning Java can be a great skill to acquire if you want to work in the programming or software</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹4000.00</div> -->
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/carmpus_recruitment_core.jpg" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Campus Recruitment Training (Recorded)</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">This Course will be helpful for Students who are going to appear for any Job Placement/Interview like</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹3000.00</div> -->
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/crt_java.jpg" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">CRT + Core Java (Combo)</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">This Course will be helpful for Students who are going to appear for any Job Placement/Interview like</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹5000.00</div> -->
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/gate_ese.jpg" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">GATE &amp; ESE (Aptitude)</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In this Course, we cover the entire 15 marks of GATE Aptitude, covering Logical Reasoning, Quantitative</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹3000.00</div> -->
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/python_course.jpg" class="tw-aspect-video tw-object-cover" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px]">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Python (Core &amp; Advance)</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">Python is general-purpose, high-level, interpreted, interactive, object-oriented, and open-source. It is</div>
+          <!-- <div class="tw-font-bold tw-text-primary">₹7000.00</div> -->
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-gradient-to-b tw-from-white tw-to-[#c7e2ff]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Skill Up with our free content</h3>
+      <p class="tw-w-[500px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Make a free ride to experience the richness!</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-3 tw-gap-[20px]">
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/article.svg" class="tw-aspect-video tw-object-contain tw-max-w-full" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px] tw-text-center">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Article</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In grammar, an article is any member of a class of dedicated words that are used.</div>
+        </div>
+      </div>
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/tests.svg" class="tw-aspect-video tw-object-contain tw-max-w-full" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px] tw-text-center">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Tests</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In grammar, an article is any member of a class of dedicated words that are used.</div>
+        </div>
+      </div>
+      <div class="tw-bg-white tw-flex tw-flex-col tw-rounded-[10px] tw-overflow-hidden tw-shadow-[0_0_5px_#cfcfcf] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+        <img src="assets/images/videos.svg" class="tw-aspect-video tw-object-contain tw-max-w-full" />
+        <div class="tw-p-[20px] tw-flex tw-flex-col tw-gap-[10px] tw-text-center">
+          <div class="tw-text-[18px] tw-font-bold tw-truncate">Videos</div>
+          <div class="tw-opacity-60 tw-line-clamp-2">In grammar, an article is any member of a class of dedicated words that are used.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-white">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Get Ready for Placements with Us</h3>
+      <p class="tw-w-[800px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Our Outstanding Training makes your gateway to various career opportunities</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-4 [&>div]:tw-flex [&>div]:tw-flex-col [&>div]:tw-gap-[20px] [&>div]:tw-items-center [&>div]:tw-px-[12px] [&>div]:tw-py-[40px] [&_svg]:tw-size-[80px] [&>div>div]:tw-w-[150px] [&>div>div]:tw-text-center">
+      <div class="tw-flex tw-flex-col tw-bg-amber-100">
+        <svg><use href="#icon-uniE913"></use></svg>
+        <div>Interactive Live Online Sessions</div>
+      </div>
+      <div class="tw-flex tw-flex-col tw-bg-primary-100">
+        <svg><use href="#icon-uniE912"></use></svg>
+        <div>Hands-on Learning Experience</div>
+      </div>
+      <div class="tw-flex tw-flex-col tw-bg-green-100">
+        <svg><use href="#icon-uniE911"></use></svg>
+        <div>Certificate of Completion</div>
+      </div>
+      <div class="tw-flex tw-flex-col tw-bg-red-100">
+        <svg><use href="#icon-uniE910"></use></svg>
+        <div>Highly Affordable and Resourceful</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-white">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">BRAINWIZ Instructor</h3>
+      <p class="tw-w-[800px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">Watch our Online Sessions to know about Us</p>
+    </div>
+    <div class="tw-grid tw-grid-cols-12 tw-gap-[20px] [&_img]:tw-w-full [&_img]:tw-object-cover [&_img]:tw-border [&_img]:tw-border-solid [&_img]:tw-border-gray-300  [&_img:hover]:tw-border-primary-300 [&_.swiper-videos_img]:tw-aspect-[16/9] [&_.swiper-video_img]:tw-aspect-[16/9] md:[&_.swiper-video_img]:tw-aspect-[16/6]">
+      <div class="tw-col-span-12 swiper-video">
+        <a href="https://youtu.be/bJSu7faNda4" target="_blank"><img src="https://img.youtube.com/vi/bJSu7faNda4/maxresdefault.jpg" /></a>
+      </div>
+      <div class="tw-col-span-12">
+        <div class="swiper swiper-videos tw-pb-[30px]">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><a href="https://youtu.be/MxRiAL0GlCM" target="_blank"><img src="https://img.youtube.com/vi/MxRiAL0GlCM/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/uUG_m7_kUhQ" target="_blank"><img src="https://img.youtube.com/vi/uUG_m7_kUhQ/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/kKQjMpIAbYo" target="_blank"><img src="https://img.youtube.com/vi/kKQjMpIAbYo/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/bJSu7faNda4" target="_blank"><img src="https://img.youtube.com/vi/bJSu7faNda4/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/MxRiAL0GlCM" target="_blank"><img src="https://img.youtube.com/vi/MxRiAL0GlCM/maxresdefault.jpg" /></a></div>
+            <div class="swiper-slide"><a href="https://youtu.be/uUG_m7_kUhQ" target="_blank"><img src="https://img.youtube.com/vi/uUG_m7_kUhQ/maxresdefault.jpg" /></a></div>
+          </div>
+          <div class="swiper-pagination tw-bottom-0"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tw-flex tw-justify-center">
+      <a href="#" class="btn btn-primary btn-bw tw-self-start">Learn More <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-p-[3px]">
+  <div class="swiper swiper-gallery [&_img]:tw-w-full [&_img]:tw-h-full [&_img]:tw-object-cover]">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery01.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery02.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[600px] tw-h-[500px] tw-grid tw-gap-[3px] [&>img:nth-child(1)]:tw-col-start-1 [&>img:nth-child(1)]:tw-col-end-3 [&>img:nth-child(1)]:tw-row-start-1 [&>img:nth-child(1)]:tw-row-end-2 [&>img:nth-child(2)]:tw-col-start-1 [&>img:nth-child(2)]:tw-col-end-2 [&>img:nth-child(2)]:tw-row-start-2 [&>img:nth-child(2)]:tw-row-end-3 [&>img:nth-child(3)]:tw-col-start-2 [&>img:nth-child(3)]:tw-col-end-3 [&>img:nth-child(3)]:tw-row-start-2 [&>img:nth-child(3)]:tw-row-end-3">
+        <img src="assets/images/gallery03.webp" alt="" />
+        <img src="assets/images/gallery04.webp" alt="" />
+        <img src="assets/images/gallery05.webp" alt="" />
+      </div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery06.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery07.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery08.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery01.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery02.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[600px] tw-h-[500px] tw-grid tw-gap-[3px] [&>img:nth-child(1)]:tw-col-start-1 [&>img:nth-child(1)]:tw-col-end-3 [&>img:nth-child(1)]:tw-row-start-1 [&>img:nth-child(1)]:tw-row-end-2 [&>img:nth-child(2)]:tw-col-start-1 [&>img:nth-child(2)]:tw-col-end-2 [&>img:nth-child(2)]:tw-row-start-2 [&>img:nth-child(2)]:tw-row-end-3 [&>img:nth-child(3)]:tw-col-start-2 [&>img:nth-child(3)]:tw-col-end-3 [&>img:nth-child(3)]:tw-row-start-2 [&>img:nth-child(3)]:tw-row-end-3">
+        <img src="assets/images/gallery03.webp" alt="" />
+        <img src="assets/images/gallery04.webp" alt="" />
+        <img src="assets/images/gallery05.webp" alt="" />
+      </div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery06.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery07.webp" alt="" /></div>
+      <div class="swiper-slide tw-w-[300px] tw-h-[500px]"><img src="assets/images/gallery08.webp" alt="" /></div>
+   
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-bg-[url(assets/images/trackrecord-bg.jpg)] tw-bg-cover tw-bg-center">
+  <div class="tw-px-[12px] tw-py-[50px] tw-bg-gradient-to-r tw-from-[#432371]/90 tw-to-[#faae7b]/90 tw-text-white">
+    <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+      <div class="tw-flex tw-flex-col tw-gap-[5px]">
+        <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Our Track Record</h3>
+        <p class="tw-w-[800px] tw-max-w-full tw-mx-auto tw-text-center tw-opacity-60 tw-m-0">BRAINWIZ has trained more than 50k students and helping them to get placed in top tech companies. Our Expert Trainers provide from basic to Advance level of knowledge that makes students standout in their campus placements.</p>
+      </div>
+      <div class="tw-grid tw-grid-cols-3 [&_h5]:tw-text-[20px] lg:[&_h5]:tw-text-[80px] [&_h5]:tw-m-0 [&_p]:tw-m-0 [&_h5]:tw-font-bold [&_p]:tw-text-[20px] tw-text-center">
+        <div class="tw-flex tw-flex-col">
+          <h5>50K</h5>
+          <p>Active Learners</p>
+        </div>
+        <div class="tw-flex tw-flex-col">
+          <h5>20+</h5>
+          <p>Happy Institutions</p>
+        </div>
+        <div class="tw-flex tw-flex-col">
+          <h5>90%</h5>
+          <p>Placed Students</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tw-block tw-px-[12px] tw-py-[50px] tw-bg-white">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="page-title-bw tw-text-[25px] tw-text-center tw-font-bold tw-m-0">Our Students Success Stories</h3>
+    </div>
+ <div class="-tw-mt-[10px] -tw-mb-[30px]">
+  <div class="-tw-mx-[10px]">
+    <div class="swiper swiper-stories tw-w-full">
+      <div class="swiper-wrapper">
+        
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide tw-p-[10px] tw-pb-[30px]">
+          <div class="tw-bg-white tw-flex tw-flex-col tw-text-center tw-rounded-[10px] tw-items-center tw-p-[20px] tw-overflow-hidden tw-shadow-[0_0_10px] tw-shadow-black/10">
+            <div>
+              <img src="assets/images/kamalakar.jpg" class="tw-size-[75px] tw-rounded-full" />
+            </div>
+            <div class="tw-mb-[10px] tw-mt-[5px]">Placed in TCS</div>
+            <div class="tw-mb-[10px]">I learned CRT training from Brainwiz. Excellent CRT training Institute I suggest who are studying 3rd & 4th b.tech join first for CRT that will help you more in written test. Thankyou Brainwiz& pavan jaiswal sir</div>
+            <div class="tw-font-bold">Kamalakar</div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="swiper-pagination tw-bottom-0"></div>
+    </div>
+  </div>
+ </div>
+  </div>
+</section>
+<section class="tw-hidden lg:tw-block tw-px-[12px] tw-py-[50px] tw-text-white tw-bg-gradient-to-b tw-from-[#0d3b3c]/90 tw-to-[#001f64]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <h3 class="tw-text-[25px] tw-text-center tw-font-bold tw-m-0">The BRAINWIZ advantages</h3>
+    </div>
+    <table class="[&_i]:tw-text-[20px] [&_i.fa-circle-check]:tw-text-transparent [&_i.fa-circle-check]:tw-bg-clip-text [&_i.fa-circle-check]:tw-bg-gradient-to-t [&_i.fa-circle-check]:tw-from-amber-500 [&_i.fa-circle-check]:tw-to-yellow-100 [&_tr:nth-child(even)]:tw-bg-black/20 [&_td]:tw-p-[20px] [&_tr>td:not(:first-child)]:tw-text-center">
+      <tr>
+        <td></td>
+        <td>Brainwiz</td>
+        <td>Free Resources</td>
+        <td>Other Courses</td>
+      </tr>
+      <tr>
+        <td>Structured + program solving based</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+      </tr>
+      <tr>
+        <td>Fastest 1:1 doubt support</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Expert Faculty</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+        <td><i class="fa fa-xmark"></i></td>
+      </tr>
+      <tr>
+        <td>Test Series with Integrated Learning Platform</td>
+        <td><i class="fa fa-circle-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+    </table>
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <div class="tw-flex tw-justify-between">
+        <div>Brainwiz</div>
+        <div>Your dream role, faster and with confidence!</div>
+      </div>
+      <div class="progress tw-h-[8px] !tw-rounded-[0px]">
+        <div class="progress-bar" style="width: 100%"></div>
+      </div>
+    </div>
+    <div class="tw-flex tw-flex-col tw-gap-[5px]">
+      <div class="tw-flex tw-justify-between">
+        <div>Others</div>
+        <div>Average role, under-cofident</div>
+      </div>
+      <div class="progress tw-h-[8px] !tw-rounded-[0px]">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+    </div>
+    <div class="tw-text-center">
+      <a href="#" class="btn btn-primary btn-bw tw-self-start tw-mb-[20px]">Explore Courses <i class="fa fa-angle-right"></i></a>
+      <h4 class="tw-text-[24px] tw-font-bold">Trusted by learners</h4>
+      <p>50,000+ BRAINWIZ Students working in top Tech companies</p>
+      <div class="tw-flex tw-justify-center tw-gap-[40px] tw-mt-[30px]">
+        <div class="tw-flex tw-items-center tw-gap-[10px] tw-text-left">
+          <img src="assets/images/fb-icon2.png" class="tw-size-[30px]" />
+          <div>
+            <strong class="tw-text-[18px] tw-font-bold">4.5 </strong>
+            <div>354+ reviews</div>
+          </div>
+        </div>
+        <div class="tw-flex tw-items-center tw-gap-[10px] tw-text-left">
+          <img src="assets/images/gl-icon.png" class="tw-size-[30px]" />
+          <div>
+            <strong class="tw-text-[18px] tw-font-bold">4.8</strong>
+            <div>385+ reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="tw-block tw-bg-[#f6faff] tw-px-[12px] tw-py-[50px]">
+  <div class="tw-flex tw-flex-col tw-gap-[30px] tw-max-w-[1280px] tw-mx-auto">
+    <div class="tw-grid
+        tw-grid-cols-12
+        tw-gap-[30px]
+        [&_h5]:tw-text-[20px]
+        [&_h5]:tw-m-0
+        [&_h5]:tw-font-bold
+        [&_h5]:tw-mb-[20px]
+        [&_ul]:tw-flex
+        [&_ul]:tw-flex-col
+        [&_ul]:tw-gap-[10px]
+        [&_ul]:tw-p-0
+        [&_ul]:tw-m-0
+        [&_ul]:tw-list-none
+        [&_ul>li>span]:tw-text-[14px]
+        [&_ul>li>span]:tw-text-[#18191b]
+        [&_ul>li>a]:tw-no-underline
+        [&_ul>li>a]:tw-text-[#18191b]
+        [&_ul>li>a]:tw-text-[14px]">
+
+      <div class="tw-col-span-12 md:tw-col-span-6 lg:tw-col-span-3">
+        <a href="index.html"><img src="assets/images/logo.svg" class="tw-h-[30px] tw-max-w-full tw-mb-[20px] lg:tw-mb-[20px]" /></a>
+        <p class="tw-text-[.875em] tw-text-[#111111]">Brainwiz is one of the leading CRT Institute in South India. It was established in 2015 in Hyderabad to import quality training for CRT (Campus Recruitment Training) & Various competitive Examinations.</p>
+        <ol class="tw-flex tw-gap-[5px] tw-m-0 tw-mb-[20px] tw-p-0 tw-list-none [&_a]:tw-flex [&_a_img]:tw-size-[40px]">
+          <li><a href=""><img src="assets/images/fb-icon.png" /></a></li>
+          <li><a href=""><img src="assets/images/yt-icon.png" /></a></li>
+        </ol>
+        <p class="tw-text-[.875em] tw-text-[#111111] tw-m-0">© 2025 All Rights Reserved</p>
+      </div>
+      <div class="tw-col-span-12 md:tw-col-span-6 lg:tw-col-span-3">
+        <h5>Brainwiz</h5>
+        <ul>
+          <li>
+            <a href="">Home</a>
+          </li>
+          <li>
+            <a href="">About</a>
+          </li>
+          <li>
+            <a href="">Contact</a>
+          </li>
+          <li>
+            <a href="">Success Stories</a>
+          </li>
+        </ul>
+      </div>
+      <div class="tw-col-span-12 md:tw-col-span-6 lg:tw-col-span-3">
+        <h5>Terms</h5>
+        <ul>
+          <li><a href="">Terms & Conditions</a></li>
+          <li><a href="">Privacy Policy</a></li>
+          <li><a href="">Cancel & Refund Policy</a></li>
+          <li><a href="">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="tw-col-span-12 md:tw-col-span-6 lg:tw-col-span-3">
+        <h5>Reach us</h5>
+        <ul>
+          <li>
+            <span><i class="fa fa-map-marker tw-mr-[10px]"></i># 3rd Floor, Beside Reliance Fresh, Near Satyam Theatre, Srinivasa Nagar, Ameerpet, Hyderabad</span>
+          </li>
+          <li>
+            <span><i class="fa fa-envelope tw-mr-[10px]"></i>gobrainwiz@gmail.com</span>
+          </li>
+          <li>
+            <span><i class="fa fa-mobile tw-mr-[10px]"></i>+91 8886233228</span>
+          </li>
+        </ul>
+        <p class="tw-font-bold tw-mt-[20px]">Interested in Joining our Course?</p>
+        <div class="tw-flex tw-gap-[20px]">
+          <img src="assets/images/arrow-fooer.png" class="-tw-mt-[10px]" />
+          <a href="#" class="btn btn-primary btn-bw tw-self-start">Enroll Now <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="tw-flex tw-flex-col tw-items-center tw-gap-[10px]">
+      <h6>To join our Live Session, Download our App</h6>
+      <ol class="tw-flex tw-gap-[10px] tw-m-0 tw-p-0 tw-list-none [&_a]:tw-flex [&_img]:tw-h-[46px]">
+        <li>
+          <a href=""><img src="assets/images/appstore.png" /></a>
+        </li>
+        <li>
+          <a href=""><img src="assets/images/play.png" /></a>
+        </li>
+      </ol>
+    </div>
+  </div>
+</footer>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Navigation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body [&_ul]:tw-p-0 [&_ul]:tw-m-0 [&_ul]:tw-list-none [&_ul_li>a]:tw-flex [&_ul_li>a]:tw-no-underline [&_ul_li>a]:tw-text-gray-800 [&_ul_li>a]:tw-p-[10px]">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about-us.html">About us</a></li>
+      <li class="tw-relative dropdown">
+        <a href="#" data-bs-toggle="dropdown" >Courses <i class="fa fa-caret-down"></i></a>
+        <ul class="dropdown-menu !tw-static !tw-transform-none tw-w-full">
+          <li><a href="#" class="dropdown-item">CRT</a></li>
+          <li><a href="#" class="dropdown-item">Online CRT Course</a></li>
+          <li><a href="#" class="dropdown-item">AMCAT</a></li>
+          <li><a href="#" class="dropdown-item">E-Litmus</a></li>
+          <li><a href="#" class="dropdown-item">E-Litmus questions</a></li>
+          <li><a href="#" class="dropdown-item">CoCubes</a></li>
+          <li><a href="#" class="dropdown-item">Classroom Training</a></li>
+          <li><a href="#" class="dropdown-item">Online Training</a></li>
+          <li><a href="#" class="dropdown-item">Campus Connect</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Videos</a></li>
+      <li><a href="#">Test Series</a></li>
+      <li><a href="#">Buy Now</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </div>
+</div>
+<a class="whatsapp tw-cursor-pointer tw-block tw-fixed tw-bottom-[20px] [&.active]:tw-bottom-[70px] tw-right-[10px] tw-z-[999] tw-transition-all tw-duration-300 tw-ease-out" href="https://api.whatsapp.com/send?phone=+918142123938&text=Hi, I am interested in your Online Course, Could you help me out to know more or Call me back?" target="_blank"><img class="tw-size-[50px]" src="assets/images/whatsapp.svg" /></a>
+<a class="gototop-bw tw-cursor-pointer tw-opacity-0 [&.active]:tw-opacity-100 tw-transition-all tw-duration-300 tw-ease-out tw-flex tw-items-center tw-justify-center tw-size-[40px] tw-rounded-full tw-bg-white tw-text-[#0177b5] tw-text-[20px] tw-shadow-[2px_2px_10px_#828282] tw-no-underline tw-fixed tw-bottom-[20px] tw-right-[15px] tw-z-[99]"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+  </body>
+</html>

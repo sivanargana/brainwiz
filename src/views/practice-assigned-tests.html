@@ -1,23 +1,39 @@
 {% extends 'layouts/admin-layout.html' %} 
 {% block adminLayout %}
-<nav aria-label="breadcrumb" class="tw-flex-none">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item">Practice Tests</li>
-    <li class="breadcrumb-item active" aria-current="page">Assigned Tests</li>
-  </ol>
-</nav>
-<div class="tw-p-[10px] tw-bg-gradient-to-r tw-from-primary-200 tw-to-gray-200 tw-rounded-[10px] tw-mb-[20px] tw-flex tw-items-center tw-gap-[20px]">
+ 
+<div class="tw-p-[10px] bg-white tw-shadow tw-rounded-[10px] tw-mb-[20px] tw-flex-col md:tw-flex-row tw-flex tw-items-center tw-gap-[20px]">
   <img src="assets/images/icons8-education-96.png" class="tw-size-[60px] tw-object-contain" /> 
-  <span class="tw-text-[18px] tw-font-medium">Practice Tests to Learn More</span>
+<div class="tw-flex tw-flex-col tw-text-center md:tw-text-left">
+    <span class="tw-text-[20px] tw-font-bold">My Practice Tests</span>
+  <span class="tw-text-[14px] tw-font-normal tw-text-gray-400">Trach you performance in this course</span>
+</div>
+<div class="md:tw-ml-auto tw-text-[20px] tw-font-medium tw-text-gray-400">
+  3/60 Done | 5% Completed
+</div>
 </div>
 
 
- 
-<div class="tw-grid tw-grid-cols-12 tw-gap-[20px] lg:tw-gap-[30px]">
+<ul class="nav nav-underline">
+  <li class="nav-item">
+    <a class="nav-link active" id="practice-tab" data-bs-toggle="tab" data-bs-target="#practice-tab-pane">Practice (16)</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed-tab-pane">Completed (12)</a>
+  </li>
+ <div class="tw-ml-auto">
+  <div class="bw-search">
+    <input type="text" placeholder="Search">
+    <button type="button"><i class="fa fa-search"></i></button>
+  </div>
+ </div>
+</ul>
+<div class="tab-content">
+
+<div class="tab-pane fade show active" id="practice-tab-pane" >
+  <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-[20px] lg:tw-gap-[30px] tw-mt-[30px] tw-w-[1000px] tw-max-w-full tw-mx-auto">
   <!-- loop starts here -->
-  {% for test in data %}
-  <div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-4 tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+  {% for test in data[:1] %}
+  <div class="tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
     <img src="assets/images/{{ test.image }}" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
     <div class="tw-flex tw-flex-col">
       <div class="tw-font-bold tw-text-[20px] tw-text-center">{{ test.topic }}</div>
@@ -39,34 +55,21 @@
     </div>
     <a href="#" class="btn btn-outline-primary tw-self-center">Start Test</a>
   </div>
-  {% if(loop.index == 1) %}
-<div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-8">
+   {% endfor %}
+<div class="">
     <div class="tw-bg-white tw-rounded-[10px] tw-shadow tw-h-full tw-flex tw-flex-col tw-justify-center tw-items-center">
-      <img src="assets/images/animation1.gif" class="tw-aspect-[1/1]  md:tw-aspect-[1/1] xl:tw-aspect-[1/.3] tw-w-full tw-h-full tw-object-contain" />
+      <img src="assets/images/animation1.gif" class="tw-aspect-[1/1]  md:tw-aspect-[1/1] xl:tw-aspect-[1/.3] tw-w-full tw-h-full tw-object-contain tw-object-bottom-left" />
     </div>
 </div>
-  {% endif %}
-  {% endfor %}
+ 
+
    <!-- loop ends here -->
 </div>
-<nav class="tw-mt-[20px] tw-flex tw-justify-center">
-  <ul class="pagination">
-    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-chevron-left"></i></a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active">
-      <a class="page-link" href="#" aria-current="page">2</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-right"></i></a></li>
-  </ul>
-</nav>
-<div class="tw-flex tw-items-center tw-justify-start tw-gap-[20px] tw-my-[15px]"> 
-  <div class="tw-bg-primary-200 tw-text-primary-500 tw-border-0 tw-border-l-[3px] tw-border-solid tw-border-primary-500 tw-text-[18px] tw-font-medium tw-py-[5px] tw-px-[15px]"><i class="fa fa-clipboard tw-mr-[20px]"></i>My Unattempted Tests </div>
-</div>
-<div class="tw-grid tw-grid-cols-12 tw-gap-[20px] lg:tw-gap-[30px]">
+ 
+<div class="tw-grid tw-grid-cols-12 tw-gap-[20px] lg:tw-gap-[30px] tw-mt-[30px]">
   <!-- loop starts here -->
   {% for test in data %}
-  <div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-4 tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
+  <div class="tw-col-span-12 md:tw-col-span-6 xl:tw-col-span-3 tw-bg-white tw-rounded-[10px] tw-p-[10px] tw-shadow tw-flex tw-flex-col tw-gap-[10px] tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-out hover:tw-scale-[1.05] hover:tw-shadow-lg">
     <img src="assets/images/{{ test.image }}" class="tw-max-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-gray-300" />
     <div class="tw-flex tw-flex-col">
       <div class="tw-font-bold tw-text-[20px] tw-text-center">{{ test.topic }}</div>
@@ -92,15 +95,22 @@
   {% endfor %}
    <!-- loop ends here -->
 </div>
-<nav class="tw-mt-[20px] tw-flex tw-justify-center">
-  <ul class="pagination">
+<nav class="tw-mt-[20px] tw-flex tw-justify-end">
+  <ul class="pagination bw-pagination">
     <li class="page-item"><a href="#" class="page-link"><i class="fa fa-chevron-left"></i></a></li>
     <li class="page-item"><a class="page-link" href="#">1</a></li>
     <li class="page-item active">
       <a class="page-link" href="#" aria-current="page">2</a>
     </li>
     <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">8</a></li>
     <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-right"></i></a></li>
   </ul>
 </nav>
+</div>
+  <div class="tab-pane fade" id="completed-tab-pane">..2.</div>
+  </div>
+ 
+
 {% endblock %}
