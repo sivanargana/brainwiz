@@ -73,7 +73,12 @@ def changepassword():
 
 @app.route('/live-sessions.html')
 def livesessions():
-    return render_template("/live-sessions.html")
+    return render_template("/live-sessions.html",data=data.data["tests"])
+
+ 
+@app.route('/live-sessions-series.html')
+def livesessionsseries():
+    return render_template("/live-sessions-series.html",data=data.data["tests"])
 
  
 

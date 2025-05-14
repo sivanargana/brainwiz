@@ -1,23 +1,17 @@
 {% extends 'layouts/admin-layout.html' %} 
 {% block adminLayout %}
 <div class="tw-p-[10px] bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-mb-[20px] tw-flex-col md:tw-flex-row tw-flex tw-items-center tw-gap-[20px]">
-  <img src="assets/images/icons8-training-94.png" class="tw-size-[60px] tw-object-contain tw-hidden md:tw-block" /> 
+  <img src="assets/images/icons8-java-96.png" class="tw-size-[60px] tw-object-contain tw-hidden md:tw-block" /> 
 <div class="tw-flex tw-flex-col tw-text-center md:tw-text-left">
-    <span class="tw-text-[20px] tw-font-bold">Live Sessions</span>
+    <span class="tw-text-[20px] tw-font-bold">Core Java</span>
   <span class="tw-text-[14px] tw-font-normal tw-text-gray-400">Improve your coding skills</span>
 </div>
 </div>
 <div class="tw-grid tw-grid-cols-12 tw-gap-[20px]">
   <div class="tw-col-span-8">
-    <div class="tw-aspect-video tw-flex tw-flex-col tw-justify-center tw-items-center tw-gap-[20px] tw-bg-gray-200  tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg" data-layout="timerview">
-  <div class="tw-text-xl tw-font-medium">Start time 18 April,24  7:20 PM |  Duration 15 Mins.</div>
-  <div class="tw-text-base tw-font-bold">Live Class Starts In</div>
-  <div class="countdown"></div>
-  <button class="btn btn-success" data-layout="startlive"><i class="fa fa-video tw-mr-[10px]"></i>Start Live Class</button>
-  <button class="btn btn-primary tw-hidden" data-layout="joinlive"><i class="fa fa-video tw-mr-[10px]"></i>Join Live Class</button>
-</div>
+  
 
-    <div class="ratio ratio-16x9  tw-bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-overflow-hidden tw-hidden"  data-layout="videoview">
+    <div class="ratio ratio-16x9  tw-bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-overflow-hidden" >
       <video width="640" height="360" controls autoplay muted>
         <source src="assets/videos/intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
@@ -28,15 +22,63 @@
     <div class="tw-bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-h-full tw-flex tw-flex-col">
       <div class="tw-flex-none tw-min-h-[50px]  tw-flex tw-items-center tw-gap-[20px] tw-px-[10px] tw-border-0 tw-border-b tw-border-solid tw-border-gray-200">
         <!-- <i class="fa fa-chevron-left tw-mr-[10px]"></i> -->
-        <div class="tw-font-bold">Notes</div>
+        <div class="tw-font-bold">Up Next</div>
       </div>
-      <div class="tw-flex-auto">
-        <textarea placeholder="Make a Note" class="tw-w-full tw-h-full tw-border-0 tw-outline-none tw-p-[10px] tw-bg-gray-50/50 focus:tw-bg-gray-100/50"></textarea>
+      <div class="tw-flex-auto tw-min-h-[0px] tw-max-h-[500px] tw-overflow-y-auto">
+       <div class="list-group list-group-flush">
+        <div class="list-group-item" class="dropdown" data-bs-toggle="dropdown">
+          <div class="tw-font-semibold">Important Topics in Java</div>
+          <div class="tw-text-sm tw-text-gray-400">5 MB |  PDF 10 Pages</div>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Download Video</a></li>
+    <li><a class="dropdown-item" href="#">Download PDF</a></li> 
+  </ul>
+        </div>
+        <div class="list-group-item" class="dropdown" data-bs-toggle="dropdown">
+          <div class="tw-font-semibold">Important Topics in Java</div>
+          <div class="tw-text-sm tw-text-gray-400">5 MB |  PDF 10 Pages</div>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Download Video</a></li>
+    <li><a class="dropdown-item" href="#">Download PDF</a></li> 
+  </ul>
+        </div>
+        <div class="list-group-item" class="dropdown" data-bs-toggle="dropdown">
+          <div class="tw-font-semibold">Important Topics in Java</div>
+          <div class="tw-text-sm tw-text-gray-400">5 MB |  PDF 10 Pages</div>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Download Video</a></li>
+    <li><a class="dropdown-item" href="#">Download PDF</a></li> 
+  </ul>
+        </div>
+        <div class="list-group-item" class="dropdown" data-bs-toggle="dropdown">
+          <div class="tw-font-semibold">Important Topics in Java</div>
+          <div class="tw-text-sm tw-text-gray-400">5 MB |  PDF 10 Pages</div>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Download Video</a></li>
+    <li><a class="dropdown-item" href="#">Download PDF</a></li> 
+  </ul>
+        </div>
+        <div class="list-group-item" class="dropdown" data-bs-toggle="dropdown">
+          <div class="tw-font-semibold">Important Topics in Java</div>
+          <div class="tw-text-sm tw-text-gray-400">5 MB |  PDF 10 Pages</div>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Download Video</a></li>
+    <li><a class="dropdown-item" href="#">Download PDF</a></li> 
+  </ul>
+        </div>
+        <div class="list-group-item" class="dropdown" data-bs-toggle="dropdown">
+          <div class="tw-font-semibold">Important Topics in Java</div>
+          <div class="tw-text-sm tw-text-gray-400">5 MB |  PDF 10 Pages</div>
+     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Download Video</a></li>
+    <li><a class="dropdown-item" href="#">Download PDF</a></li> 
+  </ul>
+        </div>
+        
+   
+       </div>
       </div>
-      <div class="tw-flex-none tw-min-h-[50px] tw-flex tw-items-center tw-justify-center tw-gap-[10px] tw-p-[10px] tw-shadow-[0_-6px_5px_-3px] tw-shadow-black/10 ">
-      <button class="btn btn-outline-primary"><i class="fa fa-image tw-mr-[10px]"></i>Take Screenshot</button>
-      <button class="btn btn-primary"><i class="fa fa-download tw-mr-[10px]"></i>Download PDF</button>
-      </div>
+    
     </div>
   </div>
 </div>
@@ -90,51 +132,11 @@
 {% endblock %}
 {% block scriptBlock %}
 <script>
-    let startlive = document.querySelector('[data-layout="startlive"]')
-  let joinlive = document.querySelector('[data-layout="joinlive"]')
-  let timerview = document.querySelector('[data-layout="timerview"]')
-  let videoview = document.querySelector('[data-layout="videoview"]')
-
  
-  let timerEle = document.querySelector(".countdown");
-  const end = new Date(Date.now() + 10000);
-  const interval = setInterval(() => {
-    const remaining = countdown(new Date(), end);
-    timerEle.innerHTML = `
-<ul>
-  <li>
-    <span>${remaining.days}</span>
-    <span>Days</span>
-  </li>
-  <li>
-    <span>${remaining.hours}</span>
-    <span>Hrs</span>
-  </li>
-  <li>
-    <span>${remaining.minutes}</span>
-    <span>Mins</span>
-  </li>
-  <li>
-    <span>${remaining.seconds}</span>
-    <span>Secs</span>
-  </li>
-</ul>
-`
-    if (Date.now() >= end.getTime()) {
-      clearInterval(interval);
-      startlive.classList.add("tw-hidden")
-      joinlive.classList.remove("tw-hidden")
-    }
-  }, 1000);
-  var starratingPrebuilt = new StarRating('.star-rating-prebuilt', {
+ 
+   var starratingPrebuilt = new StarRating('.star-rating-prebuilt', {
     prebuilt: true,
     maxStars: 5,
   });
-
-  joinlive.addEventListener("click",()=>{
-    timerview.classList.add("tw-hidden")
-    videoview.classList.remove("tw-hidden")
-  })
-
 </script>
       {% endblock %}
