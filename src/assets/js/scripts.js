@@ -1,8 +1,4 @@
-AOS.init({
-  once: true, 
-  offset: 200,
-});
-
+ 
 let sidebarElement = document.querySelector("[data-layout='sidebar']");
 let sidebarToggle = document.querySelectorAll("[data-layout='toggle']"); 
 if (sidebarElement) {
@@ -60,7 +56,10 @@ function logout(e) {
     cancelButtonText: "No",
   }).then((result) => {
     if (result.isConfirmed) {
-      window.location = "login.html";
+      Toastify({text: "Logged Out Successfully!"}).showToast()
+      setTimeout(() => {
+        window.location = "login.html";
+      }, 1000);
     }
   });
 }

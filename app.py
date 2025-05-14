@@ -13,16 +13,7 @@ def home():
 def index():
     return render_template("index.html",data=data.data["courses"])
 
-@app.route('/progress.html')
-def progress():
-
-   pages =  data.data["pages"]
-   html = sum(1 for page in pages if page["html"] == "completed")
-   react = sum(1 for page in pages if page["react"] == "completed")
-   length = len(pages)
  
-
-   return render_template("/progress.html",data={"pages":pages,"html":html,"react":react,"length":length})
 
 @app.route('/about-us.html')
 def aboutus():
@@ -84,17 +75,7 @@ def changepassword():
 def livesessions():
     return render_template("/live-sessions.html")
 
-@app.route('/courses.html')
-def courses():
-    return render_template("/courses.html")
-
-@app.route('/download-pdfs.html')
-def downloadpdfs():
-    return render_template("/download-pdfs.html")
-
-@app.route('/daily-puzzles.html')
-def dailypuzzles():
-    return render_template("/daily-puzzles.html")
+ 
 
 @app.route('/practice-assigned-tests.html')
 def practiceassignedtests():
