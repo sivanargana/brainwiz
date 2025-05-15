@@ -81,6 +81,11 @@ def livesessionsseries():
     return render_template("/live-sessions-series.html",data=data.data["tests"])
 
  
+@app.route('/live-sessions-pdf.html')
+def livesessionspdf():
+    return render_template("/live-sessions-pdf.html",data=data.data["tests"])
+
+ 
 
 @app.route('/practice-assigned-tests.html')
 def practiceassignedtests():

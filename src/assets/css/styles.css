@@ -144,3 +144,13 @@ a {
 [data-star-rating] .gl-star-rating--stars[aria-label]:before{
   display: none;
 }
+
+#videoattachments{
+
+  .accordion-button{
+    padding: 10px;
+    display: flex; 
+    align-items:center;
+  }
+
+}
