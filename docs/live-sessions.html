@@ -173,11 +173,11 @@
   ul{
     @apply tw-flex tw-list-none tw-p-0 tw-m-0 tw-gap-[10px];
     li{
-      @apply tw-flex tw-flex-col tw-items-center tw-justify-center tw-bg-white tw-shadow tw-size-[60px] tw-rounded-[10px];
+      @apply tw-flex tw-flex-col tw-items-center tw-justify-center tw-bg-white tw-shadow tw-size-[40px] md:tw-size-[50px] tw-rounded-[10px];
       span{
     
         &:nth-child(1){
-          @apply tw-text-xl tw-font-bold;
+          @apply tw-text-sm md:tw-text-base tw-font-bold;
         }
            &:nth-child(2){
           @apply tw-text-xs tw-opacity-50;
@@ -280,10 +280,10 @@
 </div>
 </div>
 <div class="tw-grid tw-grid-cols-12 tw-gap-[20px]">
-  <div class="tw-col-span-8">
-    <div class="tw-aspect-video tw-flex tw-flex-col tw-justify-center tw-items-center tw-gap-[20px] tw-bg-gray-200  tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg" data-layout="timerview">
-  <div class="tw-text-xl tw-font-medium">Start time 18 April,24  7:20 PM |  Duration 15 Mins.</div>
-  <div class="tw-text-base tw-font-bold">Live Class Starts In</div>
+  <div class="tw-col-span-12 xl:tw-col-span-8">
+    <div class="tw-aspect-video tw-flex tw-flex-col tw-justify-center tw-items-center tw-gap-[10px] md:tw-gap-[20px] tw-bg-gray-200  tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg" data-layout="timerview">
+  <div class="tw-text-sm md:tw-text-xl tw-font-medium tw-text-center">Start time 18 April,24  7:20 PM |  Duration 15 Mins.</div>
+  <div class="tw-text-sm md:tw-text-base tw-font-bold">Live Class Starts In</div>
   <div class="countdown"></div>
   <button class="btn btn-success" data-layout="startlive"><i class="fa fa-video tw-mr-[10px]"></i>Start Live Class</button>
   <button class="btn btn-primary tw-hidden" data-layout="joinlive"><i class="fa fa-video tw-mr-[10px]"></i>Join Live Class</button>
@@ -296,7 +296,7 @@
       </video>
     </div>
   </div>
-  <div class="tw-col-span-4">
+  <div class="tw-col-span-12 xl:tw-col-span-4">
     <div class="tw-bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-h-full tw-flex tw-flex-col">
       <div class="tw-flex-none tw-min-h-[50px]  tw-flex tw-items-center tw-gap-[20px] tw-px-[10px] tw-border-0 tw-border-b tw-border-solid tw-border-gray-200">
         <!-- <i class="fa fa-chevron-left tw-mr-[10px]"></i> -->
@@ -318,7 +318,7 @@
 </div>
 <div class="tw-bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg  tw-p-[20px] tw-mt-[20px]">
   <div class="tw-text-xl tw-font-medium tw-mb-[10px]">About Trainer</div>
-  <div class="tw-flex tw-gap-[20px] tw-items-center">
+  <div class="tw-flex-col md:tw-flex-row tw-flex tw-gap-[20px] tw-items-center tw-text-center md:tw-text-left">
       <div class="tw-size-[60px] tw-bg-gray-300 tw-rounded-full tw-bg-cover tw-bg-center tw-bg-[url(assets/images/profile.avif)]" ></div>
       <div class="tw-flex-auto">
         <div class="tw-text-2xl tw-font-semibold">John Doe</div>
