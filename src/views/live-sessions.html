@@ -1,10 +1,17 @@
 {% extends 'layouts/admin-layout.html' %} 
 {% block adminLayout %}
-<div class="tw-p-[10px] bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-mb-[20px] tw-flex-col md:tw-flex-row tw-flex tw-items-center tw-gap-[20px]">
+<div class="tw-p-[10px] bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-mb-[20px] tw-flex-col md:tw-flex-row tw-hidden md:tw-flex tw-items-center tw-gap-[20px]">
   <img src="assets/images/icons8-training-94.png" class="tw-size-[60px] tw-object-contain tw-hidden md:tw-block" /> 
 <div class="tw-flex tw-flex-col tw-text-center md:tw-text-left">
     <span class="tw-text-[20px] tw-font-bold">Live Sessions</span>
   <span class="tw-text-[14px] tw-font-normal tw-text-gray-400">Improve your coding skills</span>
+</div>
+</div>
+<div class="tw-p-[10px] bg-white tw-shadow-[0_0_5px] tw-shadow-black/30 tw-rounded-lg tw-mb-[20px] tw-flex md:tw-hidden tw-items-center tw-gap-[10px]">
+   <!-- <button type="button" class="btn btn-icon"><i class="fa fa-angle-left"></i></button> -->
+<div class="tw-flex tw-flex-col">
+    <span class="tw-text-[20px] tw-font-bold">Core Java</span>
+  <span class="tw-text-[14px] tw-font-normal tw-text-gray-400">Lesson 1 - Oops Concept</span>
 </div>
 </div>
 <div class="tw-grid tw-grid-cols-12 tw-gap-[20px]">
@@ -40,7 +47,7 @@
     </div>
   </div>
 </div>
-<div class="tw-py-[10px] tw-border-0 tw-border-b-2 tw-border-solid tw-border-gray-300">
+<div class="tw-py-[10px] tw-border-0 tw-border-b-2 tw-border-solid tw-border-gray-300 tw-hidden md:tw-block">
   <div class="tw-text-xl tw-font-medium">Core Java</div>
   <div class="tw-text-2xl tw-font-bold">Lesson 1 - Oops Concept</div>
 </div>
