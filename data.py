@@ -43,6 +43,20 @@ data = {
        
         
     ],
+      "courses2":[
+    {
+        "title": "Core Java",
+        "image": "java.jpeg"
+    },
+     {
+        "title": "Python",
+        "image": "python.jpeg"
+    },
+      {
+        "title": "DSA",
+        "image": "dsa.jpeg"
+    }
+    ],
     "tests":[
     {
         "category": "Logical Reasoning",
