@@ -8,15 +8,20 @@ if (sidebarElement) {
       isSidebarOpen = true;
       sidebarElement.classList.add("open");
       sidebarToggle.forEach((item) => {
-        item.querySelector("i").classList.add("fa-close");
-        item.querySelector("i").classList.remove("fa-bars");
+        if(item.querySelector("i")){
+          item.querySelector("i").classList.add("fa-close");
+          item.querySelector("i").classList.remove("fa-bars");
+
+        }
       });
     } else {
       isSidebarOpen = false;
       sidebarElement.classList.remove("open");
       sidebarToggle.forEach((item) => {
-        item.querySelector("i").classList.remove("fa-close");
-        item.querySelector("i").classList.add("fa-bars");
+        if(item.querySelector("i")){
+          item.querySelector("i").classList.remove("fa-close");
+          item.querySelector("i").classList.add("fa-bars");
+        }
       });
     }
   };
